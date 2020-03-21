@@ -1,0 +1,44 @@
+app-container{
+  display: flex;
+  margin-top: 4.2rem;
+}
+
+.content{
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 10.6rem;
+  padding-top: 1.76rem;
+  padding-bottom: 1.76rem;
+  justify-content: center;
+  height: calc(100vh - 18.16rem);
+  box-sizing: border-box;
+
+  h1{
+    font-size: 3.344rem;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    font-weight: 300;
+    letter-spacing: -0.0789em;
+    text-align: center;
+    color: #333333;
+    margin: 0 0 2.112rem;
+
+    >span{
+      font-weight: bold;
+    }
+  }
+
+  h2{
+    font-size: 2.358rem;
+    font-weight: 300;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.3;
+    letter-spacing: -0.0485em;
+    text-align: center;
+    color: #979797;
+    margin: 0;
+  }
+}

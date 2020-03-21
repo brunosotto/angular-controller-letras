@@ -1,0 +1,35 @@
+<a class="btn-close" (click)="dialogClose(null);">
+  <app-icon-x></app-icon-x>
+</a>
+<h1 mat-dialog-title>Deploy</h1>
+<h3>Selecione o ambiente e informe o branch para fazer o deploy</h3>
+
+<form [formGroup]="deploymentForm" (ngSubmit)="onSubmit()">
+  <div mat-dialog-content>
+    <mat-form-field>
+      <mat-select formControlName="environment" placeholder="Ambiente*">
+        <mat-option *ngFor="let env of environments" [value]="env.key">
+          {{ env.value }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="deploymentForm.get('environment').hasError('required')">
+        Informe o ambiente
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput formControlName="branch" placeholder="Branch*" trim="blur">
+      <mat-error *ngIf="deploymentForm.get('branch').hasError('required')">
+        Informe o nome da branch
+      </mat-error>
+      <mat-error *ngIf="deploymentForm.get('branch').hasError('regex')">
+        Por favor, digite apenas letras ou números
+      </mat-error>
+    </mat-form-field>
+
+  </div>
+  <div mat-dialog-actions>
+    <button [mat-dialog-close]="null" type="button">Cancelar</button>
+    <button class="prefer" type="submit">Iniciar</button>
+  </div>
+</form>

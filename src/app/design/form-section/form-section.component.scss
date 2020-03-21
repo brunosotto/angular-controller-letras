@@ -1,0 +1,97 @@
+:host > div {
+  flex: 0 0 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.title-bar {
+  display: flex;
+  justify-content: space-between;
+
+  .title {
+    display: flex;
+    cursor: pointer;
+
+    > p {
+      font-size: 1.584rem;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.44;
+      letter-spacing: -0.0334em;
+      color: #222222;
+      margin: 0;
+      flex: 0 0 18rem;
+      min-width: 18rem;
+      transition: color 344ms ease;
+    }
+
+    app-icon-chevron {
+      transform: rotate(0deg);
+      transition: transform 344ms ease;
+    }
+
+    &:hover {
+      > p {
+        color: #97c1d3;
+      }
+    }
+  }
+
+  .btn-add,
+  .btn-remove {
+    display: none;
+  }
+}
+
+.expanded {
+  .title-bar {
+    app-icon-chevron {
+      transform: rotate(180deg);
+    }
+  }
+
+  .btn-add,
+  .btn-remove {
+    display: inline-flex;
+    cursor: pointer;
+    transition: color 344ms ease;
+    margin-left: 20px;
+  }
+
+  .content-div {
+    height: auto;
+    visibility: visible;
+    display: block;
+    opacity: 1;
+  }
+}
+
+.content-div {
+  height: 0;
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s, opacity 500ms linear;
+  margin: 0;
+}
+
+:host ::ng-deep {
+  .title-bar {
+    .title:hover {
+      app-icon-chevron {
+        fill: #97c1d3;
+      }
+    }
+
+    .btn-add:hover {
+      app-icon-plus {
+        fill: #97c1d3;
+      }
+    }
+    .btn-remove:hover {
+      app-icon-trash {
+        fill: #97c1d3;
+      }
+    }
+  }
+}

@@ -1,0 +1,21 @@
+<div [class.expanded]="open">
+  <div class="title-bar">
+    <div class="title" (click)="toggle()">
+      <p>{{ _sectiontitle }}</p>
+      <app-icon-chevron></app-icon-chevron>
+    </div>
+
+    <div class="btn">
+      <a class="btn-remove" [title]="_removeTitle" *ngIf="_removable" (click)="removeEmitter()">
+        <app-icon-trash></app-icon-trash>
+      </a>
+      <a class="btn-add" [title]="_addTitle" *ngIf="_addable" (click)="addEmitter()">
+        <app-icon-plus></app-icon-plus>
+      </a>
+    </div>
+  </div>
+
+  <div class="content-div">
+    <ng-content *ngIf="true"></ng-content>
+  </div>
+</div>

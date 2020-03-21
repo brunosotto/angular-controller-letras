@@ -1,0 +1,60 @@
+.btn-close {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  background: none;
+  float: right;
+  margin-top: 1.32rem;
+  margin-right: 1.936rem;
+
+  app-icon-x {
+    cursor: pointer;
+    width: 1.232rem;
+    height: 1.496rem;
+  }
+}
+
+h1 {
+  font-size: 2.112rem;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.5;
+  letter-spacing: -0.0375em;
+  color: #222222;
+  margin: 0.44rem 0 0.32rem 0;
+  padding-bottom: 0.344rem;
+}
+
+.mat-dialog-content {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0.528rem;
+}
+
+.complete {
+  background-color: green;
+  color: white;
+
+  h4 {
+    margin: 0;
+    padding: 3px 0;
+    text-align: center;
+  }
+}
+
+.error {
+  background-color: red;
+  color: white;
+
+  h4 {
+    margin: 0 0 10px 0;
+    padding: 3px 0;
+    text-align: center;
+  }
+
+  p {
+    margin: 0;
+    padding: 0;
+  }
+}

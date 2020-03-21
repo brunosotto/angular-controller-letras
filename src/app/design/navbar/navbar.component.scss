@@ -1,0 +1,56 @@
+:host{
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+  background-color: #ffffff;
+}
+
+mat-toolbar{
+  padding: 0;
+
+  &.mat-primary{
+    background: #ffffff;
+    color: #222222;
+    height: 4.16rem;
+    border-bottom: solid 1px #dbdbdb;
+  }
+}
+
+.brand-logo {
+  margin-left: 7.3vw;
+  margin-right: 1.3vw;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.btn-page {
+  margin: 0 0.3vw 0;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+}
+
+.fill-remaining-space {
+  flex: 1 1 auto;
+}
+
+.user{
+  width: 33.3vw;
+  padding-left: 3.3rem;
+  padding-right: 9.5rem;
+  box-sizing: border-box;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  >span{
+    font-size: 1.276rem;
+    font-weight: 600;
+    line-height: 2.07;
+    letter-spacing: -0.013em;
+    color: #222222;
+  }
+}

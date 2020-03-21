@@ -1,0 +1,24 @@
+<a class="btn-close" (click)="dialogClose(null);">
+  <app-icon-x></app-icon-x>
+</a>
+<h1 mat-dialog-title>Progresso do deploy</h1>
+<mat-checkbox *ngIf="!complete" [(ngModel)]="autoscroll">Auto scroll</mat-checkbox>
+<hr>
+
+<div *ngIf="complete" class="complete">
+  <h4>Terminou</h4>
+</div>
+
+<div *ngIf="hasError" class="error">
+  <h4>Erro:</h4>
+  <p>{{error}}</p>
+</div>
+
+<div mat-dialog-content #dialogContent>
+  <div *ngIf="hasError" class="error">
+    <p>{{error}}</p>
+  </div>
+
+  <div [innerHTML]="progress | nl2br : true"></div>
+
+</div>

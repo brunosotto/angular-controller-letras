@@ -1,0 +1,118 @@
+.mat-form-field-appearance-legacy{
+  .mat-form-field-label{
+      font-size: 1.4rem;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.5;
+      letter-spacing: -0.025em;
+      color: #222222;
+  }
+
+  .mat-form-field-underline {
+      background-color: #cccccc;
+  }
+
+  &.mat-form-field-disabled .mat-form-field-underline {
+     background-color: #cccccc !important;
+     background-image: none !important;
+  }
+}
+
+.mat-form-field-disabled .mat-form-field-label {
+  color: #cccccc;
+}
+
+//mat-form-field-should-float mat-focused
+.mat-form-field{
+  .mat-form-field-ripple {
+      background-color: #dddddd;
+  }
+
+  &.mat-focused{
+      .mat-form-field-label {
+          color: #000000;
+      }
+
+      .mat-form-field-ripple {
+          background-color: #999999;
+      }
+  }
+}
+
+.mat-form-field.mat-form-field-invalid{
+  .mat-form-field-label {
+      color: #d0021b;
+  }
+  .mat-form-field-ripple {
+      background-color: #d0021b;
+  }
+}
+.mat-form-field-invalid,
+.mat-warn{
+  .mat-input-element {
+      caret-color: #d0021b;
+  }
+}
+.mat-error {
+  color: #d0021b;
+}
+
+.div-radio-group{
+  padding-bottom: 1.25em;
+  position: relative;
+
+  label.radio{
+      font-size: 1.144rem;
+      line-height: 1.77;
+      color: #777777;
+  }
+
+  mat-radio-group{
+      padding-bottom: 0.88rem;
+      border-bottom: 1px solid #dddddd;
+  }
+
+  .mat-radio-label-content{
+      font-size: 1.4rem;
+      line-height: 1.5 !important;
+      letter-spacing: -0.025em;
+      color: #222222;
+  }
+
+  .mat-radio-button.mat-accent .mat-radio-inner-circle {
+      background-color: #222222;
+  }
+  .mat-radio-button.mat-accent.mat-radio-checked .mat-radio-outer-circle {
+      border-color: #222222;
+  }
+
+  &.error{
+      .mat-radio-label-content,
+      label.radio{
+          color: #d0021b;
+      }
+
+      mat-radio-group{
+          border-bottom: 1px solid #d0021b;
+      }
+
+      .mat-radio-outer-circle {
+          border-color: #d0021b;
+      }
+
+      mat-error{
+          font-size: 1.232rem;
+          color: #d0021b;
+  
+          margin-top: 0.54166667em;
+          top: calc(100% - 1.66666667em);
+          position: absolute;
+          box-sizing: border-box;
+          width: 100%;
+          overflow: hidden;
+          line-height: 1;
+      }
+  }
+}
+

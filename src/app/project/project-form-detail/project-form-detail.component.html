@@ -1,0 +1,129 @@
+<form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+
+  <div class="row col-2">
+    <mat-form-field>
+      <input matInput appCapitalizeMask formControlName="name" placeholder="Nome*" maxlength="40" trim="blur">
+      <mat-error *ngIf="projectForm.get('name').hasError('required')">
+        Informe o nome do projeto
+      </mat-error>
+      <mat-error *ngIf="projectForm.get('name').hasError('regex')">
+        Por favor, digite apenas letras ou números
+      </mat-error>
+    </mat-form-field>
+
+    <input type="hidden" formControlName="lastRun">
+    <mat-form-field>
+      <input matInput placeholder="Última execução" disabled
+        [value]="projectForm.get('lastRun').value | date:'dd/MM/yyyy HH:mm'">
+    </mat-form-field>
+  </div>
+
+  <div class="row col-2">
+    <mat-form-field>
+      <mat-select formControlName="script" placeholder="Script de build*">
+        <mat-option *ngFor="let scr of scripts" [value]="scr.key">
+          {{ scr.value }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="projectForm.get('script').hasError('required')">
+        Informe o script de build
+      </mat-error>
+    </mat-form-field>
+
+    <mat-checkbox formControlName="enable">Ativo</mat-checkbox>
+  </div>
+
+  <div class="row col">
+    <mat-form-field>
+      <input matInput formControlName="githubRepoUrl" placeholder="Url do GitHub*" trim="blur">
+      <mat-error *ngIf="projectForm.get('githubRepoUrl').hasError('required')">
+        Informe a url do GitHub
+      </mat-error>
+      <mat-error *ngIf="projectForm.get('githubRepoUrl').hasError('invalidGithubUrl')">
+        Informe a url do GitHub válida com https:// e terminada em .git
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="row col-2">
+    <mat-form-field>
+      <input matInput formControlName="authToken" placeholder="Token de autenticação" trim="blur">
+    </mat-form-field>
+
+    <mat-form-field>
+      <input matInput formControlName="deploymentPath" placeholder="Caminho de deploy*" trim="blur">
+      <mat-error *ngIf="projectForm.get('deploymentPath').hasError('required')">
+        Informe o caminho de deploy
+      </mat-error>
+      <mat-error *ngIf="projectForm.get('deploymentPath').hasError('invalidPath')">
+        Informe um caminho válido iniciado e terminado em /
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div formArrayName="deploymentEnvs">
+    <app-form-section *ngFor="let envForm of formArrayEnvs.controls; let i=index" [formGroupName]="i"
+      [addable]="editing && i == formArrayEnvs.length - 1" addTitle="Adicionar mais um ambiente" (add)="addEnv()"
+      [removable]="editing && formArrayEnvs.length > 1" removeTitle="Remover ambiente" (remove)="remEnv(i)"
+      sectiontitle="Ambiente {{i+1}} - {{getEnvName(i)}}">
+      <div class="row col-2">
+        <mat-form-field>
+          <mat-select formControlName="name" placeholder="Nome do ambiente*">
+            <mat-option *ngFor="let env of environments" [value]="env.key">
+              {{ env.value }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="hasError(i, 'name', 'required')">
+            Informe o ambiente
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput formControlName="port" placeholder="Porta" trim="blur">
+          <mat-error *ngIf="hasError(i, 'port', 'required')">
+            Informe a porta
+          </mat-error>
+          <mat-error *ngIf="hasError(i, 'port', 'notfloat')">
+            A porta deve ser inteiro
+          </mat-error>
+          <mat-error
+            *ngIf="hasError(i, 'port', 'notnumber') || hasError(i, 'port', 'minvalue') || hasError(i, 'port', 'maxvalue')">
+            A porta deve ser numérico entre 0 e 65535
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="row col-2">
+        <input type="hidden" formControlName="lastDeploy">
+        <mat-form-field>
+          <input matInput placeholder="Último deploy" disabled
+            [value]="getControl(i, 'lastDeploy').value | date:'dd/MM/yyyy HH:mm'">
+        </mat-form-field>
+
+        <table class="history">
+          <caption>Histórico de deploy</caption>
+          <tr>
+            <th scope="col">Versão</th>
+            <th scope="col">Data</th>
+          </tr>
+          <tr *ngFor="let v of getVersions(i)">
+            <td>{{ v.version }}</td>
+            <td>{{ v.date | date:'dd/MM/yyyy HH:mm' }}</td>
+          </tr>
+        </table>
+      </div>
+
+    </app-form-section>
+  </div>
+
+  <div *ngIf="editing" class="row">
+    <button class="btn cancel" type="button" (click)="cancel();">Cancelar</button>
+    <button class="btn forte apply" type="submit">Aplicar</button>
+  </div>
+
+  <div *ngIf="!editing" class="row">
+    <button class="btn edit" type="button" (click)="edit();">Editar</button>
+    <button class="btn forte deploy" type="button" (click)="deploy();">Deploy</button>
+  </div>
+
+</form>

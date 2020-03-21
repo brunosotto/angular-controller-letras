@@ -1,0 +1,24 @@
+<a class="btn-close" (click)="dialogClose();" *ngIf="!dialogData.disableClose">
+  <app-icon-x></app-icon-x>
+</a>
+<h1 mat-dialog-title class="dialog-titulo">{{dialogData.titulo}}</h1>
+<p class="texto">{{dialogData.texto}}</p>
+<p class="hint" *ngIf="dialogData.hint">{{dialogData.hint}}</p>
+
+<form [formGroup]="dialogForm">
+
+  <div mat-dialog-content>
+    <mat-form-field *ngIf="dialogData.textarea" class="textarea">
+      <textarea matInput formControlName="textarea" [placeholder]="dialogData.textareaLabel || 'Mensagem'"></textarea>
+      <mat-error *ngIf="dialogForm.get('textarea').hasError('required')">
+        {{dialogData.textareaRequiredErrorText || 'Campo requerido'}}
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div mat-dialog-actions [class.with-textarea]="dialogData.textarea">
+    <button *ngFor="let b of dialogData.botoes" [class]="b.class || ''" (click)="dialogClose(b.retorno);"
+      [style.order]="b.order || 1" type="button">{{b.texto}}</button>
+  </div>
+
+</form>
