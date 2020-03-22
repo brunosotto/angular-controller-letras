@@ -29,7 +29,7 @@ export class ConfigService {
     // TODO: deve ser um observable
     this.config.text = text;
 
-    this.emit();
+    this.emitText();
   }
 
   public setConfigs(top: boolean, size: number, pad: number): void {
@@ -39,6 +39,12 @@ export class ConfigService {
     this.config.pad = pad;
 
     this.emit();
+  }
+
+  private emitText(): void {
+    // TODO: deve ser um observable
+    // TODO: type para o response
+    this.http.post(environment.text, {text: this.config.text}).subscribe();
   }
 
   private emit(): void {
