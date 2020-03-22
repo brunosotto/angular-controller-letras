@@ -1,28 +1,20 @@
-import { Component, OnInit } from '@angular/core';
-import { UserInfoService, UserInfo } from 'src/app/security/user-info.service';
+import { Component } from '@angular/core';
+import { Config } from 'src/app/config/config.service';
 
 @Component({
   selector: 'app-navbar',
   templateUrl: './navbar.component.html',
   styleUrls: ['./navbar.component.scss']
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
 
-  private _userInfo: UserInfo;
+  private _config: Config;
 
   constructor(
-    private readonly user: UserInfoService
   ) { }
 
-  public ngOnInit(): void {
-    // init
-    this.user.getUserInfo().subscribe(u => {
-      this._userInfo = u;
-    });
-  }
-
-  public get userInfo(): UserInfo {
-    return this._userInfo;
+  public get config(): Config {
+    return this._config;
   }
 
 }

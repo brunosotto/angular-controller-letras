@@ -1,9 +1,27 @@
 <app-container>
   <div>
-    <img width="300" alt="Logo" src="assets/devops.svg">
-    
-    <h1>Bem-vindo ao Easy-Ci!</h1>
+    <h1>Bem-vindo ao letras!</h1>
 
-    <h2>Ferramenta de integração contínua simplificada</h2>
+    <h2>Futura ferramenta de data show</h2>
   </div>
+
+  <form *ngIf="config$ | async as config" (ngSubmit)="onSubmit(config)">
+    <mat-slide-toggle [(ngModel)]="config.top" name="top" class="itens">Topo</mat-slide-toggle>
+
+    <mat-form-field class="itens">
+      <mat-label>Distanciamento</mat-label>
+      <input matInput [(ngModel)]="config.pad" name="pad" type="number" min="0.1" max="8" placeholder="0.1 a 8">
+    </mat-form-field>
+
+    <mat-form-field class="itens">
+      <mat-label>Tamanho</mat-label>
+      <input matInput [(ngModel)]="config.size" name="size" type="number" min="0.1" max="8" placeholder="0.1 a 8">
+    </mat-form-field>
+
+    <div>
+      <button type="submit" class="btn-novo">
+        <span>Emitir</span>
+      </button>
+    </div>
+  </form>
 </app-container>

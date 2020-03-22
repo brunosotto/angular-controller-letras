@@ -22,12 +22,14 @@ import {
   MatInputModule,
   MatDialogModule,
   MatSnackBarModule,
-  MatExpansionModule
+  MatExpansionModule,
+  MatSliderModule,
+  MatSlideToggleModule,
+  MatButtonToggleModule,
 } from '@angular/material';
 import { NavbarComponent } from './navbar/navbar.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { FormSectionComponent } from './form-section/form-section.component';
-import { UserInfoService } from '../security/user-info.service';
 
 @NgModule({
   imports: [
@@ -48,6 +50,9 @@ import { UserInfoService } from '../security/user-info.service';
     MatDialogModule,
     MatSnackBarModule,
     MatExpansionModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatButtonToggleModule,
     RouterModule
   ],
   declarations: [
@@ -75,6 +80,9 @@ import { UserInfoService } from '../security/user-info.service';
     MatDialogModule,
     MatSnackBarModule,
     MatExpansionModule,
+    MatSliderModule,
+    MatSlideToggleModule,
+    MatButtonToggleModule,
     RouterModule,
     NavbarComponent,
     IconChevronComponent,
@@ -86,8 +94,7 @@ import { UserInfoService } from '../security/user-info.service';
     FormSectionComponent
   ],
   providers: [
-    DialogService,
-    UserInfoService
+    DialogService
   ],
   entryComponents: [
     DialogComponent

@@ -1,0 +1,20 @@
+<app-navbar routerBack="/"></app-navbar>
+
+<app-container>
+  <h1>Texto livre</h1>
+  <h2>Emita textos ao projetor.</h2>
+
+  <form (ngSubmit)="onSubmit()">
+    <div>
+      <mat-form-field class="example-full-width">
+        <mat-label>Texto abaixo</mat-label>
+        <textarea [(ngModel)]="texto" name="texto" matInput placeholder="Ex. It makes me feel..."></textarea>
+      </mat-form-field>
+    </div>
+    <div>
+      <button type="submit" class="btn-novo">
+        <span>Emitir</span>
+      </button>
+    </div>
+  </form>
+</app-container>

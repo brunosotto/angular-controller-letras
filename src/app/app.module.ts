@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { StaticPagesModule } from './static-pages/static-pages.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DeployModule } from './deploy/deploy.module';
+import { TextoModule } from './texto/texto.module';
+import { ConfigService } from './config/config.service';
 
 @NgModule({
   declarations: [
@@ -24,10 +26,13 @@ import { DeployModule } from './deploy/deploy.module';
     HomeModule,
     StaticPagesModule,
     ProjectModule,
+    TextoModule,
     PipesModule,
     DeployModule
   ],
-  providers: [],
+  providers: [
+    ConfigService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

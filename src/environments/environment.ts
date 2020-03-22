@@ -1,5 +1,7 @@
 export const environment = {
   production: false,
+  config: './api/configs',
+  text: './api/text',
   user: {
     info: './api/user-info'
   },
