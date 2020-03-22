@@ -1,0 +1,23 @@
+<app-navbar routerBack="/"></app-navbar>
+
+<app-container>
+  <h1>Louvor</h1>
+
+  <form *ngFor="let item of arr" (ngSubmit)="onSubmit(texto.value)">
+    <div>
+      <mat-form-field class="example-full-width">
+        <mat-label>Parágrafo</mat-label>
+        <textarea #texto name="texto" matInput placeholder="Ex. It makes me feel..."></textarea>
+      </mat-form-field>
+      <button type="submit" class="btn-novo">
+        <span>Emitir</span>
+      </button>
+    </div>
+  </form>
+
+  <div>
+    <button (click)="addParagrafo()" type="button" class="btn-novo">
+      <span>Adicionar parágrafo</span>
+    </button>
+  </div>
+</app-container>

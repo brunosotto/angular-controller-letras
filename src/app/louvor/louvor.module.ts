@@ -5,7 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MascarasModule } from '../masks/mascaras.module';
 import { DesignModule } from '../design/design.module';
-import { TextoComponent } from './texto.component';
+import { LouvorComponent } from './louvor.component';
 import { HttpConnectorService } from '../security/http-connector.service';
 import { DeployService } from '../deploy/deploy.service';
 
@@ -20,7 +20,7 @@ import { DeployService } from '../deploy/deploy.service';
     PipesModule
   ],
   declarations: [
-    TextoComponent,
+    LouvorComponent,
   ],
   exports: [
     RouterModule
@@ -30,4 +30,4 @@ import { DeployService } from '../deploy/deploy.service';
     HttpConnectorService
   ]
 })
-export class TextoModule { }
+export class LouvorModule { }

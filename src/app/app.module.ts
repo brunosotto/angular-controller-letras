@@ -12,6 +12,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DeployModule } from './deploy/deploy.module';
 import { TextoModule } from './texto/texto.module';
 import { ConfigService } from './config/config.service';
+import { LouvorModule } from './louvor/louvor.module';
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { ConfigService } from './config/config.service';
     StaticPagesModule,
     ProjectModule,
     TextoModule,
+    LouvorModule,
     PipesModule,
     DeployModule
   ],
