@@ -4,6 +4,7 @@ import { HomePageComponent } from './home/home-page/home-page.component';
 import { NotfoundPageComponent } from './static-pages/notfound-page/notfound-page.component';
 import { TextoComponent } from './texto/texto.component';
 import { LouvorComponent } from './louvor/louvor.component';
+import { LouvorShowComponent } from './louvor/louvor-show/louvor-show.component';
 
 const ROUTES: Routes = [
   { path: '', component: HomePageComponent },
@@ -11,7 +12,9 @@ const ROUTES: Routes = [
   { path: 'biblia', redirectTo: '/biblia/*', pathMatch: 'full' },
   { path: 'biblia/:id', component: LouvorComponent },
 
-  { path: 'louvor', component: LouvorComponent },
+  { path: 'louvor', redirectTo: '/louvor/*', pathMatch: 'full' },
+  { path: 'louvor/:id', component: LouvorComponent },
+  { path: 'louvor/:id/show', component: LouvorShowComponent },
 
   { path: 'texto', component: TextoComponent },
 

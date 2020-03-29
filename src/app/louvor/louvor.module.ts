@@ -10,6 +10,8 @@ import { LouvorFormComponent } from './louvor-form/louvor-form.component';
 import { LouvorComponent } from './louvor.component';
 import { LouvorFormDetailComponent } from './louvor-form-detail/louvor-form-detail.component';
 import { HttpConnectorService } from '../security/http-connector.service';
+import { LouvorShowComponent } from './louvor-show/louvor-show.component';
+import { Nl2BrPipeModule } from 'nl2br-pipe';
 
 @NgModule({
   imports: [
@@ -19,12 +21,14 @@ import { HttpConnectorService } from '../security/http-connector.service';
     DesignModule,
     RouterModule,
     MascarasModule,
-    PipesModule
+    PipesModule,
+    Nl2BrPipeModule
   ],
   declarations: [
     LouvorComponent,
     LouvorFormComponent,
     LouvorFormDetailComponent,
+    LouvorShowComponent,
   ],
   entryComponents: [
     LouvorFormComponent,

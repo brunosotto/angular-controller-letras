@@ -1,12 +1,12 @@
 <app-navbar routerBack="/"></app-navbar>
 
 <app-container>
-  <h1>Projetos</h1>
-  <h2>Gerencie os projetos cadastrados.</h2>
+  <h1>Louvores</h1>
+  <h2>Gerencie os louvores cadastrados.</h2>
 
   <div class="container-novo-search">
     <a class="btn-novo" (click)="newLouvor();">
-      <span>Novo projeto</span>
+      <span>Novo louvor</span>
       <app-icon-plus></app-icon-plus>
     </a>
 
@@ -23,7 +23,7 @@
     <div *ngIf="!isLoading && (!louvores || louvores.length === 0)" class="item nenhum">
       <span class="txt nome">
         <p>
-          Nenhum projeto encontrado
+          Nenhum louvor encontrado
         </p>
       </span>
     </div>
@@ -34,8 +34,12 @@
       </span>
       <span class="separator"></span>
       <span class="txt last-run" (click)="detail(louvor);">
-        <p>{{ louvor?.lastRun | relativeTime }}</p>
       </span>
+      <div>
+        <a class="btn-abrir" [routerLink]="['..', louvor.id, 'show']">
+          <span>Abrir</span>
+        </a>
+      </div>
       <div>
         <a class="btn-detalhe" (click)="detail(louvor);" [class.open]="expanded === louvor.id">
           <span>Detalhes</span>

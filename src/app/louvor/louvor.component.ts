@@ -100,13 +100,16 @@ export class LouvorComponent implements OnInit, OnDestroy {
 
   private order(arr: Louvor[]): Louvor[] {
     return arr.sort((a, b) => {
-      // se é nulo algum
-      if (!a.lastRun || !b.lastRun) {
-        return 0;
-      }
+      const nameA = a.name.toUpperCase();
+      const nameB = b.name.toUpperCase();
 
-      // compara
-      return (b.lastRun.getTime() - a.lastRun.getTime());
+      let comparison = 0;
+      if (nameA > nameB) {
+        comparison = 1;
+      } else if (nameA < nameB) {
+        comparison = -1;
+      }
+      return comparison;
     });
   }
 
@@ -141,7 +144,7 @@ export class LouvorComponent implements OnInit, OnDestroy {
     observable.subscribe(
       data => {
         this.loadLouvores();
-        this.snackBar.open('Projeto salvo com sucesso', null, {
+        this.snackBar.open('Louvor salvo com sucesso', null, {
           duration: 2000
         });
       }
@@ -158,8 +161,8 @@ export class LouvorComponent implements OnInit, OnDestroy {
 
   public delete(louvor: Louvor): void {
     const options: Dialog = {
-      titulo: 'Deletar projeto',
-      texto: `Você deseja excluir o projeto ${louvor.name}?`,
+      titulo: 'Deletar louvor',
+      texto: `Você deseja excluir o louvor ${louvor.name}?`,
       hint: 'Essa ação não poderá ser desfeita',
       disableClose: true,
       botoes: [
@@ -173,7 +176,7 @@ export class LouvorComponent implements OnInit, OnDestroy {
       if (excluir === true) {
         this.louvorService.deleteLouvor(louvor).subscribe(
           data => {
-            this.snackBar.open('Projeto excluído com sucesso', null, {
+            this.snackBar.open('Louvor excluído com sucesso', null, {
               duration: 2000
             });
             this.loadLouvores();

@@ -175,7 +175,9 @@ h2 {
       }
     }
 
-    .btn-detalhe {
+    .btn-detalhe,
+    .btn-abrir {
+      text-decoration: none;
       display: flex;
       align-items: center;
       background-color: #368aae;

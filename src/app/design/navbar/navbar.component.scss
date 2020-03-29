@@ -54,3 +54,26 @@ mat-toolbar{
     color: #222222;
   }
 }
+
+.btn-novo {
+  display: inline-flex;
+  align-items: center;
+  background-color: #333333;
+  border: solid 1px #333333;
+  box-sizing: border-box;
+  font-size: 1.408rem;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.63;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  padding: 0.968rem 1.76rem;
+  margin-right: 7.3vw;
+  cursor: pointer;
+  transition: background-color 100ms;
+
+  &:hover {
+    background-color: #999999;
+  }
+}

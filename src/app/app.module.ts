@@ -11,6 +11,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { TextoModule } from './texto/texto.module';
 import { ConfigService } from './config/config.service';
 import { LouvorModule } from './louvor/louvor.module';
+import { Nl2BrPipeModule } from 'nl2br-pipe';
 
 @NgModule({
   declarations: [
@@ -26,7 +27,8 @@ import { LouvorModule } from './louvor/louvor.module';
     StaticPagesModule,
     TextoModule,
     LouvorModule,
-    PipesModule
+    PipesModule,
+    Nl2BrPipeModule
   ],
   providers: [
     ConfigService

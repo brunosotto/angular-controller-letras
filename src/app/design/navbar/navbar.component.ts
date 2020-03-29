@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Config } from 'src/app/config/config.service';
+import { Config, ConfigService } from 'src/app/config/config.service';
 
 @Component({
   selector: 'app-navbar',
@@ -11,10 +11,16 @@ export class NavbarComponent {
   private _config: Config;
 
   constructor(
+    private readonly service: ConfigService,
   ) { }
 
   public get config(): Config {
     return this._config;
+  }
+
+  public limpar(): void {
+    // TODO: bloquear até receber de volta
+    this.service.sendText(' ');
   }
 
 }
