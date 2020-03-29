@@ -1,6 +1,6 @@
-import { ProjectServiceMock } from './../../../../mock/project.service.mock';
-import { ProjectService } from './../project.service';
-import { ProjectFormComponent } from './../project-form/project-form.component';
+import { LouvorServiceMock } from './../../../../mock/louvor.service.mock';
+import { LouvorService } from './../louvor.service';
+import { LouvorFormComponent } from './../louvor-form/louvor-form.component';
 import { DialogServiceMock } from './../../../../mock/dialog.service.mock';
 import { RouterTestingModule } from '@angular/router/testing';
 import { UtilityService } from './../../utility.service';
@@ -16,17 +16,18 @@ import { DialogService } from '../../design/dialog/dialog.service';
 import { MatDialogMock } from '../../../../mock/mat-dialog.mock';
 import { HttpConnectorService } from '../../security/http-connector.service';
 import { HttpConnectorServiceMock } from '../../../../mock/http-connector.service.mock';
-import { ProjectFormDetailComponent } from './project-form-detail.component';
-import { Project } from '../../models/project.model';
-import { ProjectComponent } from '../project.component';
+import { LouvorFormDetailComponent } from './louvor-form-detail.component';
+import { Louvor } from '../../models/louvor.model';
+import { LouvorComponent } from '../louvor.component';
 
-describe('ProjectFormDetailComponent', () => {
-  let component: ProjectFormDetailComponent;
-  let fixture: ComponentFixture<ProjectFormDetailComponent>;
+describe('LouvorFormDetailComponent', () => {
+  let component: LouvorFormDetailComponent;
+  let fixture: ComponentFixture<LouvorFormDetailComponent>;
 
-  const project: Project = {
+  const louvor: Louvor = {
     id: '6gf546fd45',
-    name: 'Bruno Sotto'
+    name: 'AAA',
+    text: 'BBB'
   };
 
   beforeEach(async(() => {
@@ -43,13 +44,13 @@ describe('ProjectFormDetailComponent', () => {
         DesignModule
       ],
       declarations: [
-        ProjectFormComponent,
-        ProjectComponent,
-        ProjectFormDetailComponent
+        LouvorFormComponent,
+        LouvorComponent,
+        LouvorFormDetailComponent
       ],
       providers: [
         UtilityService,
-        { provide: ProjectService, useClass: ProjectServiceMock },
+        { provide: LouvorService, useClass: LouvorServiceMock },
         { provide: MatDialog, useClass: MatDialogMock },
         { provide: DialogService, useClass: DialogServiceMock },
         MatSnackBar,
@@ -60,7 +61,7 @@ describe('ProjectFormDetailComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProjectFormDetailComponent);
+    fixture = TestBed.createComponent(LouvorFormDetailComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -80,15 +81,15 @@ describe('ProjectFormDetailComponent', () => {
   });
 
   it('should loadForm onSubmit', () => {
-    (component as any).project = project;
+    (component as any).louvor = louvor;
     component.ngOnInit();
     component.onSubmit();
     expect(component).toBeTruthy();
   });
 
   it('should loadForm onSubmit invalid', () => {
-    const of: Project = { ...project };
-    (component as any).project = of;
+    const of: Louvor = { ...louvor };
+    (component as any).louvor = of;
     component.ngOnInit();
     component.edit();
     component.onSubmit();
@@ -96,7 +97,7 @@ describe('ProjectFormDetailComponent', () => {
   });
 
   it('should cancelar', () => {
-    (component as any).project = project;
+    (component as any).louvor = louvor;
     component.cancel();
     expect(component).toBeTruthy();
   });

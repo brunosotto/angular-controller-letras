@@ -1,5 +1,5 @@
-import { Project } from './../models/project.model';
-import { ProjectServiceMock } from './../../../mock/project.service.mock';
+import { Louvor } from './../models/louvor.model';
+import { LouvorServiceMock } from './../../../mock/louvor.service.mock';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MascarasModule } from './../masks/mascaras.module';
@@ -7,9 +7,9 @@ import { DialogServiceMock } from './../../../mock/dialog.service.mock';
 import { DesignModule } from './../design/design.module';
 import { MatDialogMock } from './../../../mock/mat-dialog.mock';
 import { async, ComponentFixture, TestBed, inject } from '@angular/core/testing';
-import { ProjectComponent } from './project.component';
-import { Renderer } from '@angular/core';
-import { ProjectService } from './project.service';
+import { LouvorComponent } from './louvor.component';
+import { Renderer2 } from '@angular/core';
+import { LouvorService } from './louvor.service';
 import { MatDialog, MatSnackBar, MatDialogModule } from '@angular/material';
 import { DialogService } from '../design/dialog/dialog.service';
 import { Routes, ActivatedRoute } from '@angular/router';
@@ -19,25 +19,23 @@ import { HttpConnectorServiceMock } from '../../../mock/http-connector.service.m
 import { UtilityService } from '../utility.service';
 import { CommonModule } from '@angular/common';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ProjectFormDetailComponent } from './project-form-detail/project-form-detail.component';
-import { ProjectFormComponent } from './project-form/project-form.component';
+import { LouvorFormDetailComponent } from './louvor-form-detail/louvor-form-detail.component';
+import { LouvorFormComponent } from './louvor-form/louvor-form.component';
 import { of } from 'rxjs';
 
-const project: Project = {
+const louvor: Louvor = {
   id: '1234',
-  name: 'Bruno',
-  documentNumber: '325',
-  phone: '(11) 94863-9694',
-  auctioneer: '12345'
+  name: 'AAA',
+  text: '325',
 };
 
 const fakeActivatedRoutesData = {
-  ProjectsRoute: {
+  LouvoresRoute: {
     path: 'frotapropria',
     data: { page: 1, id: '*' },
     url: [{ path: 'frotapropria' }]
   },
-  ProjectsSearchRoute: {
+  LouvoresSearchRoute: {
     path: 'frotapropria-s',
     data: { page: 1, id: '*', option: 'auctioneer', value: '12345' },
     url: [{ path: 'frotapropria-s' }]
@@ -47,28 +45,28 @@ const fakeActivatedRoutesData = {
 const fakeRoutes: Routes = [
   { path: 'frotapropria', redirectTo: '/frotapropria/1/*', pathMatch: 'full' },
   { path: 'frotapropria/:page', redirectTo: '/frotapropria/:page/*', pathMatch: 'full' },
-  { path: 'frotapropria/:page/:id', component: ProjectComponent, data: fakeActivatedRoutesData.ProjectsRoute.data },
+  { path: 'frotapropria/:page/:id', component: LouvorComponent, data: fakeActivatedRoutesData.LouvoresRoute.data },
 
   // frotapropria - search
   { path: 'frotapropria-s/:option/:value', redirectTo: '/frotapropria-s/:option/:value/1/*', pathMatch: 'full' },
   { path: 'frotapropria-s/:option/:value/:page', redirectTo: '/frotapropria-s/:option/:value/:page/*', pathMatch: 'full' },
-  { path: 'frotapropria-s/:option/:value/:page/:id', component: ProjectComponent, data: fakeActivatedRoutesData.ProjectsSearchRoute.data },
+  { path: 'frotapropria-s/:option/:value/:page/:id', component: LouvorComponent, data: fakeActivatedRoutesData.LouvoresSearchRoute.data },
 ];
 
-describe('ProjectComponent', () => {
-  let component: ProjectComponent;
-  let fixture: ComponentFixture<ProjectComponent>;
+describe('LouvorComponent', () => {
+  let component: LouvorComponent;
+  let fixture: ComponentFixture<LouvorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ProjectComponent,
-        ProjectFormDetailComponent,
-        ProjectFormComponent
+        LouvorComponent,
+        LouvorFormDetailComponent,
+        LouvorFormComponent
       ],
       providers: [
-        Renderer,
-        { provide: ProjectService, useClass: ProjectServiceMock },
+        Renderer2,
+        { provide: LouvorService, useClass: LouvorServiceMock },
         { provide: MatDialog, useClass: MatDialogMock },
         { provide: DialogService, useClass: DialogServiceMock },
         MatSnackBar,
@@ -77,11 +75,11 @@ describe('ProjectComponent', () => {
         { // ActivatedRoute
           provide: ActivatedRoute,
           useValue: {
-            params: of(fakeActivatedRoutesData.ProjectsRoute.data),
+            params: of(fakeActivatedRoutesData.LouvoresRoute.data),
             snapshot: {
-              params: { ...fakeActivatedRoutesData.ProjectsRoute.data, page: 2 } // força snapshot com page 2 para ter isChanged
+              params: { ...fakeActivatedRoutesData.LouvoresRoute.data, page: 2 } // força snapshot com page 2 para ter isChanged
             },
-            url: of(fakeActivatedRoutesData.ProjectsRoute.url),
+            url: of(fakeActivatedRoutesData.LouvoresRoute.url),
           }
         }
       ],
@@ -101,7 +99,7 @@ describe('ProjectComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProjectComponent);
+    fixture = TestBed.createComponent(LouvorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -121,7 +119,7 @@ describe('ProjectComponent', () => {
   });
 
   it('should isLoading', () => {
-    (component as any)._projects = [project];
+    (component as any)._louvores = [louvor];
     component.isLoading = true;
     expect(component).toBeTruthy();
   });
@@ -158,13 +156,13 @@ describe('ProjectComponent', () => {
   });
 
   it('should be detail', () => {
-    component.detail(project);
+    component.detail(louvor);
     expect(component).toBeTruthy();
   });
 
   it('should be detail contrai', () => {
-    (component as any)._expanded = project.id;
-    component.detail(project);
+    (component as any)._expanded = louvor.id;
+    component.detail(louvor);
     expect(component).toBeTruthy();
   });
 
@@ -173,7 +171,7 @@ describe('ProjectComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should be novaProject dialog null', inject(
+  it('should be novaLouvor dialog null', inject(
     [MatDialog],
     (dialog: MatDialog) => {
 
@@ -181,72 +179,72 @@ describe('ProjectComponent', () => {
       const respAfterClosed = null;
       (dialog as any).testSetup('respAfterClosed', respAfterClosed);
 
-      component.newProject();
+      component.newLouvor();
       expect(component).toBeTruthy();
 
     }
   ));
 
-  it('should be novaProject dialog project id existente', inject(
+  it('should be novaLouvor dialog louvor id existente', inject(
     [MatDialog],
     (dialog: MatDialog) => {
 
       // faz o setup
-      const respAfterClosed = { ...project };
+      const respAfterClosed = { ...louvor };
       (dialog as any).testSetup('respAfterClosed', respAfterClosed);
 
-      component.newProject();
+      component.newLouvor();
       expect(component).toBeTruthy();
 
     }
   ));
 
-  it('should be novaProject dialog project id null', inject(
+  it('should be novaLouvor dialog louvor id null', inject(
     [MatDialog],
     (dialog: MatDialog) => {
 
       // faz o setup
-      const respAfterClosed = { ...project, id: null };
+      const respAfterClosed = { ...louvor, id: null };
       (dialog as any).testSetup('respAfterClosed', respAfterClosed);
 
-      component.newProject();
+      component.newLouvor();
       expect(component).toBeTruthy();
 
     }
   ));
 
-  it('should be novaProject success false', inject(
-    [ProjectService, MatDialog],
-    (service: ProjectService, dialog: MatDialog) => {
+  it('should be novaLouvor success false', inject(
+    [LouvorService, MatDialog],
+    (service: LouvorService, dialog: MatDialog) => {
 
       // faz o setup
-      const respAfterClosed = { ...project, id: null };
+      const respAfterClosed = { ...louvor, id: null };
       (dialog as any).testSetup('respAfterClosed', respAfterClosed);
 
       // faz o setup
-      const respAdicionaProject = [{ success: false }];
-      (service as any).testSetup('respAdicionaProject', respAdicionaProject);
+      const respAdicionaLouvor = [{ success: false }];
+      (service as any).testSetup('respAdicionaLouvor', respAdicionaLouvor);
 
-      component.newProject();
+      component.newLouvor();
       expect(component).toBeTruthy();
 
     }
   ));
 
-  it('should be novaProject throw error', inject(
-    [ProjectService, MatDialog],
-    (service: ProjectService, dialog: MatDialog) => {
+  it('should be novaLouvor throw error', inject(
+    [LouvorService, MatDialog],
+    (service: LouvorService, dialog: MatDialog) => {
 
       // faz o setup
-      const respAfterClosed = { ...project, id: null };
+      const respAfterClosed = { ...louvor, id: null };
       (dialog as any).testSetup('respAfterClosed', respAfterClosed);
 
       // faz o setup
       const erro = 'falha na requisição';
-      const respAdicionaProject = [{ throw: true, error: erro }];
-      (service as any).testSetup('respAdicionaProject', respAdicionaProject);
+      const respAdicionaLouvor = [{ throw: true, error: erro }];
+      (service as any).testSetup('respAdicionaLouvor', respAdicionaLouvor);
 
-      component.newProject();
+      component.newLouvor();
       expect(component).toBeTruthy();
 
     }
@@ -260,7 +258,7 @@ describe('ProjectComponent', () => {
       const respOpen = [false];
       (dialog as any).testSetup('respOpen', respOpen);
 
-      component.delete(project);
+      component.delete(louvor);
       expect(component).toBeTruthy();
 
     }
@@ -274,36 +272,36 @@ describe('ProjectComponent', () => {
       const respOpen = [true];
       (dialog as any).testSetup('respOpen', respOpen);
 
-      component.delete(project);
+      component.delete(louvor);
       expect(component).toBeTruthy();
 
     }
   ));
 
   it('should be delete success false', inject(
-    [ProjectService],
-    (service: ProjectService) => {
+    [LouvorService],
+    (service: LouvorService) => {
 
       // faz o setup
-      const respDeletaProject = [{ success: false }];
-      (service as any).testSetup('respDeletaProject', respDeletaProject);
+      const respDeletaLouvor = [{ success: false }];
+      (service as any).testSetup('respDeletaLouvor', respDeletaLouvor);
 
-      component.delete(project);
+      component.delete(louvor);
       expect(component).toBeTruthy();
 
     }
   ));
 
   it('should be delete throw error', inject(
-    [ProjectService],
-    (service: ProjectService) => {
+    [LouvorService],
+    (service: LouvorService) => {
 
       // faz o setup
       const erro = 'falha na requisição';
-      const respDeletaProject = [{ throw: true, error: erro }];
-      (service as any).testSetup('respDeletaProject', respDeletaProject);
+      const respDeletaLouvor = [{ throw: true, error: erro }];
+      (service as any).testSetup('respDeletaLouvor', respDeletaLouvor);
 
-      component.delete(project);
+      component.delete(louvor);
       expect(component).toBeTruthy();
 
     }
@@ -311,20 +309,20 @@ describe('ProjectComponent', () => {
 });
 
 // search
-describe('ProjectComponent Search', () => {
-  let component: ProjectComponent;
-  let fixture: ComponentFixture<ProjectComponent>;
+describe('LouvorComponent Search', () => {
+  let component: LouvorComponent;
+  let fixture: ComponentFixture<LouvorComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [
-        ProjectComponent,
-        ProjectFormDetailComponent,
-        ProjectFormComponent
+        LouvorComponent,
+        LouvorFormDetailComponent,
+        LouvorFormComponent
       ],
       providers: [
-        Renderer,
-        { provide: ProjectService, useClass: ProjectServiceMock },
+        Renderer2,
+        { provide: LouvorService, useClass: LouvorServiceMock },
         { provide: MatDialog, useClass: MatDialogMock },
         { provide: DialogService, useClass: DialogServiceMock },
         MatSnackBar,
@@ -333,11 +331,11 @@ describe('ProjectComponent Search', () => {
         { // ActivatedRoute
           provide: ActivatedRoute,
           useValue: {
-            params: of(fakeActivatedRoutesData.ProjectsSearchRoute.data),
+            params: of(fakeActivatedRoutesData.LouvoresSearchRoute.data),
             snapshot: {
-              params: fakeActivatedRoutesData.ProjectsSearchRoute.data
+              params: fakeActivatedRoutesData.LouvoresSearchRoute.data
             },
-            url: of(fakeActivatedRoutesData.ProjectsSearchRoute.url),
+            url: of(fakeActivatedRoutesData.LouvoresSearchRoute.url),
           }
         }
       ],
@@ -357,13 +355,13 @@ describe('ProjectComponent Search', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProjectComponent);
+    fixture = TestBed.createComponent(LouvorComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should be detail search', () => {
-    component.detail(project);
+    component.detail(louvor);
     expect(component).toBeTruthy();
   });
 

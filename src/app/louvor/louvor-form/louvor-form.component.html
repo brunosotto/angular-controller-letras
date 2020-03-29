@@ -3,14 +3,14 @@
 </a>
 <h1 mat-dialog-title>Novo projeto</h1>
 
-<form [formGroup]="projectForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="louvorForm" (ngSubmit)="onSubmit()">
   <div mat-dialog-content>
     <mat-form-field>
       <input matInput appCapitalizeMask formControlName="name" placeholder="Nome*" maxlength="40" trim="blur">
-      <mat-error *ngIf="projectForm.get('name').hasError('required')">
+      <mat-error *ngIf="louvorForm.get('name').hasError('required')">
         Informe o nome do projeto
       </mat-error>
-      <mat-error *ngIf="projectForm.get('name').hasError('regex')">
+      <mat-error *ngIf="louvorForm.get('name').hasError('regex')">
         Por favor, digite apenas letras ou números
       </mat-error>
     </mat-form-field>
@@ -22,7 +22,7 @@
             {{ scr.value }}
           </mat-option>
         </mat-select>
-        <mat-error *ngIf="projectForm.get('script').hasError('required')">
+        <mat-error *ngIf="louvorForm.get('script').hasError('required')">
           Informe o script de build
         </mat-error>
       </mat-form-field>
@@ -33,10 +33,10 @@
     <div class="row col">
       <mat-form-field>
         <input matInput formControlName="githubRepoUrl" placeholder="Url do GitHub*" trim="blur">
-        <mat-error *ngIf="projectForm.get('githubRepoUrl').hasError('required')">
+        <mat-error *ngIf="louvorForm.get('githubRepoUrl').hasError('required')">
           Informe a url do GitHub
         </mat-error>
-        <mat-error *ngIf="projectForm.get('githubRepoUrl').hasError('invalidGithubUrl')">
+        <mat-error *ngIf="louvorForm.get('githubRepoUrl').hasError('invalidGithubUrl')">
           Informe a url do GitHub válida com https:// e terminada em .git
         </mat-error>
       </mat-form-field>
@@ -49,10 +49,10 @@
 
       <mat-form-field>
         <input matInput formControlName="deploymentPath" placeholder="Caminho de deploy*" trim="blur">
-        <mat-error *ngIf="projectForm.get('deploymentPath').hasError('required')">
+        <mat-error *ngIf="louvorForm.get('deploymentPath').hasError('required')">
           Informe o caminho de deploy
         </mat-error>
-        <mat-error *ngIf="projectForm.get('deploymentPath').hasError('invalidPath')">
+        <mat-error *ngIf="louvorForm.get('deploymentPath').hasError('invalidPath')">
           Informe um caminho válido iniciado e terminado em /
         </mat-error>
       </mat-form-field>

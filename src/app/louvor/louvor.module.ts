@@ -1,13 +1,15 @@
 import { PipesModule } from './../pipes/pipes.module';
+import { LouvorService } from './louvor.service';
 import { RouterModule } from '@angular/router';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { MascarasModule } from '../masks/mascaras.module';
 import { DesignModule } from '../design/design.module';
+import { LouvorFormComponent } from './louvor-form/louvor-form.component';
 import { LouvorComponent } from './louvor.component';
+import { LouvorFormDetailComponent } from './louvor-form-detail/louvor-form-detail.component';
 import { HttpConnectorService } from '../security/http-connector.service';
-import { DeployService } from '../deploy/deploy.service';
 
 @NgModule({
   imports: [
@@ -21,12 +23,17 @@ import { DeployService } from '../deploy/deploy.service';
   ],
   declarations: [
     LouvorComponent,
+    LouvorFormComponent,
+    LouvorFormDetailComponent,
+  ],
+  entryComponents: [
+    LouvorFormComponent,
   ],
   exports: [
     RouterModule
   ],
   providers: [
-    DeployService,
+    LouvorService,
     HttpConnectorService
   ]
 })

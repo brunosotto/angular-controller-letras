@@ -1,49 +1,46 @@
 import { HttpConnectorServiceMock } from './../../../mock/http-connector.service.mock';
 import { TestBed, inject } from '@angular/core/testing';
-import { ProjectService } from './project.service';
+import { LouvorService } from './louvor.service';
 import { HttpConnectorService } from '../security/http-connector.service';
 import { UtilityService } from '../utility.service';
-import { Project } from '../models/project.model';
+import { Louvor } from '../models/louvor.model';
 
-describe('ProjectService', () => {
+describe('LouvorService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
-        ProjectService,
+        LouvorService,
         { provide: HttpConnectorService, useClass: HttpConnectorServiceMock },
         UtilityService
       ]
     });
   });
 
-  const project: Project = {
+  const louvor: Louvor = {
     id: '1234',
     name: 'Bruno',
-    documentNumber: '325',
-    phone: '(11) 94863-9694',
-    auctioneer: '12345'
   };
 
-  it('should be created', inject([ProjectService], (service: ProjectService) => {
+  it('should be created', inject([LouvorService], (service: LouvorService) => {
     expect(service).toBeTruthy();
   }));
 
-  it('should be listProjects', inject(
-    [ProjectService, HttpConnectorService],
-    (service: ProjectService, http: HttpConnectorService) => {
+  it('should be listLouvores', inject(
+    [LouvorService, HttpConnectorService],
+    (service: LouvorService, http: HttpConnectorService) => {
 
       // faz o setup
       const respPost = [
-        { total: 1, projects: [project] }
+        { total: 1, louvores: [louvor] }
       ];
       (http as any).testSetup('respPost', respPost);
 
       const option = 'auctioneer';
       const value = '12345';
       const page = 1;
-      service.listProjects(option, value, page).subscribe(
+      service.listLouvores(option, value, page).subscribe(
         res => {
-          expect(res.projects[0].name).toBe('Bruno');
+          expect(res.louvores[0].name).toBe('Bruno');
         },
         error => {
           expect(error).toBeUndefined();
@@ -52,9 +49,9 @@ describe('ProjectService', () => {
     }
   ));
 
-  it('should be listProject erro', inject(
-    [ProjectService, HttpConnectorService],
-    (service: ProjectService, http: HttpConnectorService) => {
+  it('should be listLouvor erro', inject(
+    [LouvorService, HttpConnectorService],
+    (service: LouvorService, http: HttpConnectorService) => {
 
       // faz o setup
       const erro = 'falha na requisição';
@@ -64,7 +61,7 @@ describe('ProjectService', () => {
       const option = 'auctioneer';
       const value = '12345';
       const page = 1;
-      service.listProjects(option, value, page).subscribe(
+      service.listLouvores(option, value, page).subscribe(
         res => {
           expect(res).toBeUndefined();
         },
@@ -76,15 +73,15 @@ describe('ProjectService', () => {
     }
   ));
 
-  it('should be findProject', inject(
-    [ProjectService, HttpConnectorService],
-    (service: ProjectService, http: HttpConnectorService) => {
+  it('should be findLouvor', inject(
+    [LouvorService, HttpConnectorService],
+    (service: LouvorService, http: HttpConnectorService) => {
 
       // faz o setup
-      const respPost = [project];
+      const respPost = [louvor];
       (http as any).testSetup('respPost', respPost);
 
-      service.findProject('1234').subscribe(
+      service.findLouvor('1234').subscribe(
         res => {
           expect(res.name).toBe('Bruno');
         },
@@ -95,16 +92,16 @@ describe('ProjectService', () => {
     }
   ));
 
-  it('should be finfProject erro', inject(
-    [ProjectService, HttpConnectorService],
-    (service: ProjectService, http: HttpConnectorService) => {
+  it('should be finfLouvor erro', inject(
+    [LouvorService, HttpConnectorService],
+    (service: LouvorService, http: HttpConnectorService) => {
 
       // faz o setup
       const erro = 'falha na requisição';
       const respPost = [{ throw: true, error: erro }];
       (http as any).testSetup('respPost', respPost);
 
-      service.findProject('1234').subscribe(
+      service.findLouvor('1234').subscribe(
         res => {
           expect(res).toBeUndefined();
         },
@@ -116,15 +113,15 @@ describe('ProjectService', () => {
     }
   ));
 
-  it('should be deleteProject', inject(
-    [ProjectService, HttpConnectorService],
-    (service: ProjectService, http: HttpConnectorService) => {
+  it('should be deleteLouvor', inject(
+    [LouvorService, HttpConnectorService],
+    (service: LouvorService, http: HttpConnectorService) => {
 
       // faz o setup
       const respPost = [{ success: 'true', deleted: '1234' }];
       (http as any).testSetup('respPost', respPost);
 
-      service.deleteProject(project).subscribe(
+      service.deleteLouvor(louvor).subscribe(
         res => {
           expect(res.success).toBeTruthy();
         },
@@ -135,16 +132,16 @@ describe('ProjectService', () => {
     }
   ));
 
-  it('should be deleteProject erro', inject(
-    [ProjectService, HttpConnectorService],
-    (service: ProjectService, http: HttpConnectorService) => {
+  it('should be deleteLouvor erro', inject(
+    [LouvorService, HttpConnectorService],
+    (service: LouvorService, http: HttpConnectorService) => {
 
       // faz o setup
       const erro = 'falha na requisição';
       const respPost = [{ throw: true, error: erro }];
       (http as any).testSetup('respPost', respPost);
 
-      service.deleteProject(project).subscribe(
+      service.deleteLouvor(louvor).subscribe(
         res => {
           expect(res).toBeUndefined();
         },
@@ -156,15 +153,15 @@ describe('ProjectService', () => {
     }
   ));
 
-  it('should be addProject', inject(
-    [ProjectService, HttpConnectorService],
-    (service: ProjectService, http: HttpConnectorService) => {
+  it('should be addLouvor', inject(
+    [LouvorService, HttpConnectorService],
+    (service: LouvorService, http: HttpConnectorService) => {
 
       // faz o setup
       const respPost = [{ success: 'true', deleted: '1234' }];
       (http as any).testSetup('respPost', respPost);
 
-      service.addProject(project).subscribe(
+      service.addLouvor(louvor).subscribe(
         res => {
           expect(res.success).toBeTruthy();
         },
@@ -175,16 +172,16 @@ describe('ProjectService', () => {
     }
   ));
 
-  it('should be addProject erro', inject(
-    [ProjectService, HttpConnectorService],
-    (service: ProjectService, http: HttpConnectorService) => {
+  it('should be addLouvor erro', inject(
+    [LouvorService, HttpConnectorService],
+    (service: LouvorService, http: HttpConnectorService) => {
 
       // faz o setup
       const erro = 'falha na requisição';
       const respPost = [{ throw: true, error: erro }];
       (http as any).testSetup('respPost', respPost);
 
-      service.addProject(project).subscribe(
+      service.addLouvor(louvor).subscribe(
         res => {
           expect(res).toBeUndefined();
         },
@@ -196,15 +193,15 @@ describe('ProjectService', () => {
     }
   ));
 
-  it('should be updateProject', inject(
-    [ProjectService, HttpConnectorService],
-    (service: ProjectService, http: HttpConnectorService) => {
+  it('should be updateLouvor', inject(
+    [LouvorService, HttpConnectorService],
+    (service: LouvorService, http: HttpConnectorService) => {
 
       // faz o setup
       const respPost = [{ success: 'true', id: '1234' }];
       (http as any).testSetup('respPost', respPost);
 
-      service.updateProject(project).subscribe(
+      service.updateLouvor(louvor).subscribe(
         res => {
           expect(res.success).toBeTruthy();
         },
@@ -215,16 +212,16 @@ describe('ProjectService', () => {
     }
   ));
 
-  it('should be updateProject erro', inject(
-    [ProjectService, HttpConnectorService],
-    (service: ProjectService, http: HttpConnectorService) => {
+  it('should be updateLouvor erro', inject(
+    [LouvorService, HttpConnectorService],
+    (service: LouvorService, http: HttpConnectorService) => {
 
       // faz o setup
       const erro = 'falha na requisição';
       const respPost = [{ throw: true, error: erro }];
       (http as any).testSetup('respPost', respPost);
 
-      service.updateProject(project).subscribe(
+      service.updateLouvor(louvor).subscribe(
         res => {
           expect(res).toBeUndefined();
         },
@@ -237,8 +234,8 @@ describe('ProjectService', () => {
   ));
 
   it('should be limit', inject(
-    [ProjectService],
-    (service: ProjectService) => {
+    [LouvorService],
+    (service: LouvorService) => {
 
       expect(service.limit).toBe(10);
 

@@ -2,32 +2,32 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
 import { Validators, FormGroup, FormBuilder, FormArray, AbstractControl, ValidatorFn, ValidationErrors } from '@angular/forms';
 import { UtilityService } from '../../utility.service';
-import { Project } from '../../models/project.model';
+import { Louvor } from '../../models/louvor.model';
 import { DeploymentEnv } from 'src/app/models/deployment-env.model';
 import { KeyValueModel } from 'src/app/models/key-value.model';
-import { ProjectService } from '../project.service';
+import { LouvorService } from '../louvor.service';
 
 @Component({
-  selector: 'app-project-form',
-  templateUrl: './project-form.component.html',
-  styleUrls: ['./project-form.component.scss']
+  selector: 'app-louvor-form',
+  templateUrl: './louvor-form.component.html',
+  styleUrls: ['./louvor-form.component.scss']
 })
-export class ProjectFormComponent implements OnInit {
+export class LouvorFormComponent implements OnInit {
 
-  private project: Project;
-  private _projectForm: FormGroup;
+  private louvor: Louvor;
+  private _louvorForm: FormGroup;
 
   constructor(
     private readonly fb: FormBuilder,
-    private readonly dialogRef: MatDialogRef<ProjectFormComponent>,
+    private readonly dialogRef: MatDialogRef<LouvorFormComponent>,
     private readonly util: UtilityService,
-    private readonly service: ProjectService
+    private readonly service: LouvorService
   ) {
     this.createForm();
   }
 
   private createForm(): void {
-    this._projectForm = this.fb.group({
+    this._louvorForm = this.fb.group({
       name: ['', Validators.required, this.util.multiValida([
         this.util.validaEspacoAsync(),
         this.util.validaRegexAsync(this.util.regexCaracterEspecial)
@@ -48,7 +48,7 @@ export class ProjectFormComponent implements OnInit {
   }
 
   public get formArrayEnvs(): FormArray {
-    return this._projectForm.get('deploymentEnvs') as FormArray;
+    return this._louvorForm.get('deploymentEnvs') as FormArray;
   }
 
   private createEnvForm(): FormGroup {
@@ -79,34 +79,28 @@ export class ProjectFormComponent implements OnInit {
     return this.util.capitaLize(name);
   }
 
-  public get projectForm(): FormGroup {
-    return this._projectForm;
+  public get louvorForm(): FormGroup {
+    return this._louvorForm;
   }
 
   public onSubmit(): void {
-    if (this.projectForm.invalid) {
+    if (this.louvorForm.invalid) {
       return;
     }
 
-    this.project = this.prepareSave();
-    this.dialogClose(this.project);
+    this.louvor = this.prepareSave();
+    this.dialogClose(this.louvor);
   }
 
-  private prepareSave(): Project {
-    const formModel = this.projectForm.value;
+  private prepareSave(): Louvor {
+    const formModel = this.louvorForm.value;
 
     const deploymentEnvs = this.prepareSaveEnvs();
 
-    const save: Project = {
+    const save: Louvor = {
       id: null,
       name: this.util.trimPreventNull(formModel.name as string),
-      enable: formModel.enable,
-      script: this.util.trimPreventNull(formModel.script as string),
-      deploymentPath: this.util.trimPreventNull(formModel.deploymentPath as string),
-      lastRun: null,
-      deploymentEnvs,
-      githubRepoUrl: this.util.trimPreventNull(formModel.githubRepoUrl as string),
-      authToken: this.util.trimPreventNull(formModel.authToken as string),
+      text: this.util.trimPreventNull(formModel.text as string),
     };
 
     return save;
@@ -135,8 +129,8 @@ export class ProjectFormComponent implements OnInit {
     return envs;
   }
 
-  public dialogClose(project?: Project): void {
-    this.dialogRef.close(project);
+  public dialogClose(louvor?: Louvor): void {
+    this.dialogRef.close(louvor);
   }
 
   public addEnv(): void {
@@ -148,7 +142,7 @@ export class ProjectFormComponent implements OnInit {
   public remEnv(index: number): void {
     this.formArrayEnvs.removeAt(index);
 
-    this._projectForm.markAsDirty();
+    this._louvorForm.markAsDirty();
   }
 
   public getControl(indexForm: number, path: string): AbstractControl {

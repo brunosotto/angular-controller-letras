@@ -7,7 +7,6 @@ import { MascarasModule } from '../masks/mascaras.module';
 import { DesignModule } from '../design/design.module';
 import { TextoComponent } from './texto.component';
 import { HttpConnectorService } from '../security/http-connector.service';
-import { DeployService } from '../deploy/deploy.service';
 
 @NgModule({
   imports: [
@@ -26,7 +25,6 @@ import { DeployService } from '../deploy/deploy.service';
     RouterModule
   ],
   providers: [
-    DeployService,
     HttpConnectorService
   ]
 })

@@ -1,23 +1,56 @@
 <app-navbar routerBack="/"></app-navbar>
 
 <app-container>
-  <h1>Louvor</h1>
+  <h1>Projetos</h1>
+  <h2>Gerencie os projetos cadastrados.</h2>
 
-  <form *ngFor="let item of arr" (ngSubmit)="onSubmit(texto.value)">
-    <div>
-      <mat-form-field class="example-full-width">
-        <mat-label>Parágrafo</mat-label>
-        <textarea #texto name="texto" matInput placeholder="Ex. It makes me feel..."></textarea>
-      </mat-form-field>
-      <button type="submit" class="btn-novo">
-        <span>Emitir</span>
-      </button>
+  <div class="container-novo-search">
+    <a class="btn-novo" (click)="newLouvor();">
+      <span>Novo projeto</span>
+      <app-icon-plus></app-icon-plus>
+    </a>
+
+  </div>
+
+  <div class="lista">
+    <div *ngIf="isLoading" class="item nenhum">
+      <span class="txt nome">
+        <p>
+          Carregando...
+        </p>
+      </span>
     </div>
-  </form>
-
-  <div>
-    <button (click)="addParagrafo()" type="button" class="btn-novo">
-      <span>Adicionar parágrafo</span>
-    </button>
+    <div *ngIf="!isLoading && (!louvores || louvores.length === 0)" class="item nenhum">
+      <span class="txt nome">
+        <p>
+          Nenhum projeto encontrado
+        </p>
+      </span>
+    </div>
+    <div class="item" [class.contracted]="expanded !== louvor.id" [class.expanded]="expanded === louvor.id"
+      *ngFor="let louvor of louvores; let i = index">
+      <span class="txt nome" (click)="detail(louvor);">
+        <p>{{ louvor?.name }}</p>
+      </span>
+      <span class="separator"></span>
+      <span class="txt last-run" (click)="detail(louvor);">
+        <p>{{ louvor?.lastRun | relativeTime }}</p>
+      </span>
+      <div>
+        <a class="btn-detalhe" (click)="detail(louvor);" [class.open]="expanded === louvor.id">
+          <span>Detalhes</span>
+          <app-icon-chevron></app-icon-chevron>
+        </a>
+      </div>
+      <div>
+        <a class="btn-trash" (click)="delete(louvor);">
+          <app-icon-trash></app-icon-trash>
+        </a>
+      </div>
+      <div class="content">
+        <app-louvor-form-detail *ngIf="expanded === louvor.id"  [louvor]="louvor" (apply)="maintainLouvor($event)" (reload)="reload();">
+        </app-louvor-form-detail>
+      </div>
+    </div>
   </div>
 </app-container>

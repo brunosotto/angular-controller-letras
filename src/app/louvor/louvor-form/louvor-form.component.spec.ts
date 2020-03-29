@@ -12,12 +12,12 @@ import { Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { ProjectFormComponent } from './project-form.component';
+import { LouvorFormComponent } from './louvor-form.component';
 import { CommonModule } from '@angular/common';
 
-describe('ProjectFormComponent', () => {
-  let component: ProjectFormComponent;
-  let fixture: ComponentFixture<ProjectFormComponent>;
+describe('LouvorFormComponent', () => {
+  let component: LouvorFormComponent;
+  let fixture: ComponentFixture<LouvorFormComponent>;
 
   beforeEach(async(() => {
     const fakeRoutes: Routes = [];
@@ -35,7 +35,7 @@ describe('ProjectFormComponent', () => {
         DesignModule
       ],
       declarations: [
-        ProjectFormComponent
+        LouvorFormComponent
       ],
       providers: [
         MatSnackBar,
@@ -55,7 +55,7 @@ describe('ProjectFormComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ProjectFormComponent);
+    fixture = TestBed.createComponent(LouvorFormComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
@@ -81,9 +81,9 @@ describe('ProjectFormComponent', () => {
 
   it('should onSubmit valid', () => {
     // preenche o form
-    component.projectForm.controls.name.setValue('Bruno Sotto');
-    component.projectForm.controls.phone.setValue('(11) 94863-9694');
-    component.projectForm.controls.documentNumber.setValue('325.508.588-83');
+    component.louvorForm.controls.name.setValue('Bruno Sotto');
+    component.louvorForm.controls.phone.setValue('(11) 94863-9694');
+    component.louvorForm.controls.documentNumber.setValue('325.508.588-83');
 
     component.onSubmit();
     expect(component).toBeTruthy();

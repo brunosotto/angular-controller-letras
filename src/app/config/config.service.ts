@@ -1,12 +1,13 @@
 import { environment } from './../../environments/environment';
-import { Observable, ReplaySubject } from 'rxjs';
-import { pluck } from 'rxjs/operators';
-import { Injectable } from '@angular/core';
+import { Observable, Subject, ReplaySubject } from 'rxjs';
+import { pluck, takeUntil } from 'rxjs/operators';
+import { Injectable, OnDestroy } from '@angular/core';
 import { HttpConnectorService } from '../security/http-connector.service';
 
 @Injectable()
-export class ConfigService {
+export class ConfigService implements OnDestroy {
 
+  private destroy$: Subject<void> = new Subject<void>();
   private config: Config;
   private _config: ReplaySubject<Config> = new ReplaySubject();
   public config$: Observable<Config> = this._config.asObservable();
@@ -14,15 +15,20 @@ export class ConfigService {
   constructor(
     private readonly http: HttpConnectorService
   ) {
-    this.http.get(environment.config)
-    // TODO: takeuntil destroy
+    this.http.get<Config[]>(environment.config)
       .pipe(
+        takeUntil(this.destroy$),
         pluck('0'),
       )
       .subscribe((c: Config) => {
         this.config = c;
         this._config.next(c);
       });
+  }
+
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   public sendText(text: string): void {
@@ -38,27 +44,25 @@ export class ConfigService {
     this.config.size = size;
     this.config.pad = pad;
 
-    this.emit();
+    this.emitConfig();
   }
 
   private emitText(): void {
     // TODO: deve ser um observable
-    // TODO: type para o response
     this.http.post(environment.text, {text: this.config.text}).subscribe();
   }
 
-  private emit(): void {
+  private emitConfig(): void {
     // TODO: deve ser um observable
-    // TODO: type para o response
-    this.http.post(environment.text, this.config).subscribe(res => this.config.id = res.id);
+    this.http.post(environment.text, {...this.config, text: undefined}).subscribe(res => this.config.id = res.id);
   }
 
 }
 
 export class Config {
-    id?: string;
-    top: boolean;
-    size: number;
-    pad: number;
-    text?: string;
+  id?: string;
+  top: boolean;
+  size: number;
+  pad: number;
+  text?: string;
 }
