@@ -13,7 +13,7 @@ h1 {
   color: #222222;
   margin: 0;
   margin-left: 2.64rem;
-  margin-top: 1.936rem;
+  margin-top: 1rem;
 }
 
 h2 {
@@ -25,7 +25,8 @@ h2 {
   letter-spacing: normal;
   color: #787878;
   margin-left: 2.64rem;
-  margin-top: 1.232rem;
+  margin-top: 0rem;
+  margin-bottom: 0.5rem;
 
   > span {
     font-weight: 600;
@@ -40,4 +41,10 @@ h2 {
     text-decoration: none;
     padding: 5px 0;
   }
+}
+
+.voltar {
+  display: block;
+  text-decoration: none;
+  margin-left: 2.64rem;
 }
