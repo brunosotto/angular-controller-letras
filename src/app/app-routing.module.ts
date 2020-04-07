@@ -5,12 +5,12 @@ import { NotfoundPageComponent } from './static-pages/notfound-page/notfound-pag
 import { TextoComponent } from './texto/texto.component';
 import { LouvorComponent } from './louvor/louvor.component';
 import { LouvorShowComponent } from './louvor/louvor-show/louvor-show.component';
+import { BibliaComponent } from './biblia/biblia.component';
 
 const ROUTES: Routes = [
   { path: '', component: HomePageComponent },
 
-  { path: 'biblia', redirectTo: '/biblia/*', pathMatch: 'full' },
-  { path: 'biblia/:id', component: LouvorComponent },
+  { path: 'biblia', component: BibliaComponent },
 
   { path: 'louvor', redirectTo: '/louvor/*', pathMatch: 'full' },
   { path: 'louvor/:id', component: LouvorComponent },

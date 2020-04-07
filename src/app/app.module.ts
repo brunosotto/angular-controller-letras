@@ -12,6 +12,7 @@ import { TextoModule } from './texto/texto.module';
 import { ConfigService } from './config/config.service';
 import { LouvorModule } from './louvor/louvor.module';
 import { Nl2BrPipeModule } from 'nl2br-pipe';
+import { BibliaModule } from './biblia/biblia.module';
 
 @NgModule({
   declarations: [
@@ -26,6 +27,7 @@ import { Nl2BrPipeModule } from 'nl2br-pipe';
     HomeModule,
     StaticPagesModule,
     TextoModule,
+    BibliaModule,
     LouvorModule,
     PipesModule,
     Nl2BrPipeModule
