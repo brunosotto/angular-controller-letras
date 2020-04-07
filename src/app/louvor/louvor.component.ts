@@ -5,8 +5,9 @@ import { LouvorFormComponent } from './louvor-form/louvor-form.component';
 import { DialogService } from '../design/dialog/dialog.service';
 import { Dialog } from '../design/dialog/dialog.model';
 import { Louvor } from '../models/louvor.model';
-import { Subscription } from 'rxjs';
+import { Subject } from 'rxjs';
 import { ActivatedRoute, Router, Params } from '@angular/router';
+import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-louvor',
@@ -15,7 +16,7 @@ import { ActivatedRoute, Router, Params } from '@angular/router';
 })
 export class LouvorComponent implements OnInit, OnDestroy {
 
-  private inscRoute: Subscription;
+  private destroy$: Subject<void> = new Subject<void>();
   private _isLoading: boolean;
 
   private _louvores: Louvor[];
@@ -43,9 +44,13 @@ export class LouvorComponent implements OnInit, OnDestroy {
     this._expanded = this.route.snapshot.params.id;
 
     // monitora os params
-    this.inscRoute = this.route.params.subscribe(params => {
-      this._expanded = params.id;
-    });
+    this.route.params
+      .pipe(
+        takeUntil(this.destroy$),
+      )
+      .subscribe(params => {
+        this._expanded = params.id;
+      });
 
     // carrega a primeira
     this.loadLouvores();
@@ -72,9 +77,9 @@ export class LouvorComponent implements OnInit, OnDestroy {
     return this._expanded;
   }
 
-  public ngOnDestroy(): void {
-    // mata a inscrição da rota
-    this.inscRoute.unsubscribe();
+  ngOnDestroy() {
+    this.destroy$.next();
+    this.destroy$.complete();
   }
 
   public onChangePage(page: number): void {

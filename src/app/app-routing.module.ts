@@ -11,6 +11,7 @@ const ROUTES: Routes = [
   { path: '', component: HomePageComponent },
 
   { path: 'biblia', component: BibliaComponent },
+  { path: 'biblia/:version', component: BibliaComponent },
 
   { path: 'louvor', redirectTo: '/louvor/*', pathMatch: 'full' },
   { path: 'louvor/:id', component: LouvorComponent },

@@ -1,8 +1,24 @@
 <app-navbar routerBack="/"></app-navbar>
 
 <app-container>
-  <h1>Bíblia</h1>
-  <h2>Selecione abaixo a versão.</h2>
+  <h1>Bíblia{{ version ? ' - ' + version.toUpperCase() : ''}}</h1>
 
-  
+  <ng-container *ngIf="!version; else elseBlock">
+    <h2>Selecione abaixo a versão.</h2>
+
+    <div class="biblia-versions">
+      <a [routerLink]="['acf']">Almeida Corrigida Fiel (ACF)</a>
+      <a [routerLink]="['ara']">Almeida Revista e Atualizada (ARA)</a>
+      <a [routerLink]="['arc']">Almeida Revista e Corrigida (ARC)</a>
+      <a [routerLink]="['naa']">Nova Almeida Atualizada (NAA)</a>
+      <a [routerLink]="['nvi']">Nova Versão Internacional (NVI)</a>
+      <a [routerLink]="['nvt']">Nova Versão Transformadora (NVT)</a>
+    </div>
+  </ng-container>
+
+  <ng-template #elseBlock>
+    <h2><a [routerLink]="['..']">Voltar</a></h2>
+  </ng-template>
+
+  {{ version }}
 </app-container>

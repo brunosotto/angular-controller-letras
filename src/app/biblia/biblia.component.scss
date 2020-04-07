@@ -32,33 +32,12 @@ h2 {
   }
 }
 
-.btn-novo {
-  display: inline-flex;
-  align-items: center;
-  background-color: #368aae;
-  border: solid 1px #368aae;
-  box-sizing: border-box;
-  font-size: 1.408rem;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: 1.63;
-  letter-spacing: -0.025em;
-  color: #ffffff;
-  padding: 0.968rem 1.76rem;
-  margin-left: 2.8rem;
-  cursor: pointer;
-  transition: background-color 100ms;
+.biblia-versions {
+  margin-left: 2.64rem;
 
-  &:hover {
-    background-color: #97c1d3;
+  a {
+    display: block;
+    text-decoration: none;
+    padding: 5px 0;
   }
-}
-
-textarea {
-  min-height: 150px;
-}
-
-mat-form-field {
-  width: 100%;
 }
