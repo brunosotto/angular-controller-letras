@@ -1,9 +1,9 @@
 <app-navbar routerBack="/"></app-navbar>
 
 <app-container>
-  <h1>Bíblia</h1>
+  <h1>Bíblia {{ siglaLivro ? versao.toUpperCase() : '' }}</h1>
 
-  <ng-container *ngIf="!version; else elseBlock">
+  <ng-container *ngIf="!versao; else elseBlock">
     <h2>Selecione abaixo a versão.</h2>
 
     <div class="biblia-versions">
@@ -12,10 +12,45 @@
   </ng-container>
 
   <ng-template #elseBlock>
-    <h2>{{versions[version]}}</h2>
+    <ng-container *ngIf="biblia$ | async as biblia">
+      <h2>{{siglaLivro ? ( livro.nome + ( capituloNum ? ':' + capituloNum : '' ) ) : versions[versao]}}</h2>
 
-    <a class="voltar" [routerLink]="['..']">Voltar</a>
+      <a class="voltar" [routerLink]="['..']">Voltar</a>
+
+      <div *ngIf="capitulo" class="versiculos">
+        <ng-container *ngFor="let ver of capitulo.versiculos">
+          <div>
+            <span>
+              <sup>{{ ver.versiculo }}</sup>
+              {{ ver.texto }}
+            </span>
+            <button type="button" (click)="emitir(ver)" class="btn-novo">
+              <span>Emitir - {{ ver.versiculo }}</span>
+            </button>
+          </div>
+        </ng-container>
+      </div>
+
+      <div *ngIf="livro" class="book-capitulos">
+        <ng-container *ngFor="let cap of livro.capitulos">
+          <span>
+            <a [routerLink]="capLink(cap.capitulo)">{{cap.capitulo}}</a>
+          </span>
+        </ng-container>
+      </div>
+
+      <div class="biblia-books">
+        <ng-container *ngFor="let livro of biblia">
+          <ng-container *ngIf="livro.sigla === 'mt'">
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+            <span>&nbsp;</span>
+          </ng-container>
+          <span>
+            <a [routerLink]="bookLink(livro.sigla)">{{livro.nome}}</a>
+          </span>
+        </ng-container>
+      </div>
+    </ng-container>
   </ng-template>
-
-  {{ version }}
 </app-container>

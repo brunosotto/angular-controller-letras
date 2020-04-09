@@ -43,6 +43,78 @@ h2 {
   }
 }
 
+.biblia-books {
+  margin-top: 15px;
+  margin-left: 2.64rem;
+  column-count: 5;
+
+  span {
+    display: block;
+    a {
+      text-decoration: none;
+      padding: 5px 0;
+    }
+  }
+}
+
+.book-capitulos {
+  margin-top: 15px;
+  margin-left: 2.64rem;
+  display: flex;
+  flex-wrap: wrap;
+
+  span {
+    display: flex;
+    flex: 0 0 5%;
+    a {
+      text-decoration: none;
+      padding: 5px 0;
+    }
+  }
+}
+
+.versiculos {
+  margin-top: 15px;
+  margin-left: 2.64rem;
+
+  div {
+    padding: 1.2rem 1.8rem;
+    display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+
+    &:nth-child(odd) {
+      background-color: #c9c9c9;
+    }
+  }
+}
+
+.btn-novo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #368aae;
+  border: solid 1px #368aae;
+  box-sizing: border-box;
+  font-size: 1.2rem;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1;
+  letter-spacing: -0.025em;
+  color: #ffffff;
+  padding: 0.668rem 1.2rem;
+  margin-left: 2.8rem;
+  white-space: nowrap;
+  min-width: 110px;
+  cursor: pointer;
+  transition: background-color 100ms;
+
+  &:hover {
+    background-color: #97c1d3;
+  }
+}
+
 .voltar {
   display: block;
   text-decoration: none;
