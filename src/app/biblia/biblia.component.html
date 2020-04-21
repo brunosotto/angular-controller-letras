@@ -22,7 +22,7 @@
           <div>
             <span>
               <sup>{{ ver.versiculo }}</sup>
-              {{ ver.texto }}
+              <span [innerHTML]="ver.texto"></span>
             </span>
             <button type="button" (click)="emitir(ver)" class="btn-novo">
               <span>Emitir - {{ ver.versiculo }}</span>
