@@ -1,12 +1,12 @@
-<ng-container *ngIf="louvor$ | async as louvor">
-  <app-navbar [title]="louvor.name" routerBack="/"></app-navbar>
+<ng-container *ngIf="louvor">
+  <app-navbar [title]="louvor?.name" routerBack="/"></app-navbar>
 
   <app-container>
     <h1>{{ louvor.name }}</h1>
-    <div class="text-block" *ngFor="let item of toArray(louvor.text)">
+    <div class="text-block" [class.marcado]="i === last" [class.forte]="forte" *ngFor="let item of louvor.arr; let i = index;">
       <div [innerHTML]="item | nl2br"></div>
       <div>
-        <button type="button" (click)="emitir(item)" class="btn-novo">
+        <button type="button" (click)="emitir(i)" class="btn-novo">
           <span>Emitir</span>
         </button>
       </div>

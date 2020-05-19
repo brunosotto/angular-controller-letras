@@ -1,4 +1,4 @@
-<app-navbar [title]="siglaLivro ? ( livro?.nome + ( capituloNum ? ':' + capituloNum : '' ) ) : ( versao ? versions[versao] : 'Bíblia' )" routerBack="/"></app-navbar>
+<app-navbar [title]="siglaLivro && capituloNum ? ( livro?.nome + ':' + capituloNum ) : ( versao ? versions[versao] : 'Bíblia' )" routerBack="/"></app-navbar>
 
 <app-container>
   <h1>Bíblia {{ siglaLivro ? versao.toUpperCase() : '' }}</h1>
@@ -17,13 +17,13 @@
       <a class="voltar" [routerLink]="['..']">Voltar</a>
 
       <div *ngIf="capitulo" class="versiculos">
-        <ng-container *ngFor="let ver of capitulo.versiculos">
-          <div>
+        <ng-container *ngFor="let ver of capitulo.versiculos; let i = index;">
+          <div [class.marcado]="i === last" [class.forte]="forte">
             <span>
               <sup>{{ ver.versiculo }}</sup>
               <span [innerHTML]="ver.texto"></span>
             </span>
-            <button type="button" (click)="emitir(ver)" class="btn-novo">
+            <button type="button" (click)="emitir(i)" class="btn-novo">
               <span>Emitir - {{ ver.versiculo }}</span>
             </button>
           </div>

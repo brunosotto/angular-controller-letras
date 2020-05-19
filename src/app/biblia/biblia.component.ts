@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { takeUntil, tap } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
@@ -29,6 +29,27 @@ export class BibliaComponent {
   public livro: BibliaLivro;
   public capituloNum: number;
   public capitulo: Capitulo;
+  public last: number;
+  public forte: boolean;
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) {
+    if (event.key === 'ArrowLeft' || event.key === 'Escape') {
+      this.limpar();
+    }
+
+    if (event.key === 'ArrowRight') {
+      this.reEmitir();
+    }
+
+    if (event.key === 'ArrowDown') {
+      this.next();
+    }
+
+    if (event.key === 'ArrowUp') {
+      this.prev();
+    }
+  }
 
   constructor(
     private readonly route: ActivatedRoute,
@@ -41,6 +62,8 @@ export class BibliaComponent {
         takeUntil(this.destroy$),
       )
       .subscribe(params => {
+        this.last = undefined;
+
         this.versao = params.versao;
         this.siglaLivro = params.siglaLivro;
         this.capituloNum = Number(params.capituloNum);
@@ -65,6 +88,33 @@ export class BibliaComponent {
     this.capitulo = this.livro.capitulos.find(c => c.capitulo === this.capituloNum);
   }
 
+  private limpar(): void {
+    // marca o forte
+    this.forte = false;
+
+    this.config.sendText(' ');
+  }
+
+  private reEmitir(): void {
+    this.emitir(this.last || 0);
+  }
+
+  private next(): void {
+    if (this.capitulo.versiculos.length === ((this.last || 0) + 1)) {
+      return;
+    }
+
+    this.emitir(isNaN(this.last) ? 0 : (this.last + 1));
+  }
+
+  private prev(): void {
+    if (this.last === 0) {
+      return;
+    }
+
+    this.emitir(isNaN(this.last) ? 0 : (this.last - 1));
+  }
+
   public bookLink(sigla: string): string[] {
     if (this.capituloNum) {
       return ['../..', sigla];
@@ -85,8 +135,15 @@ export class BibliaComponent {
     return [String(cap)];
   }
 
-  public emitir(ver: Versiculo): void {
+  public emitir(index: number): void {
+    const ver = this.capitulo.versiculos[index];
     const text = `${ver.texto}\n\n${this.livro.nome} ${this.capitulo.capitulo}:${String(ver.versiculo)}`;
+
+    // guarda o indice
+    this.last = index;
+
+    // marca o forte
+    this.forte = true;
 
     // TODO: bloquear todos até receber de volta
     this.config.sendText(text);

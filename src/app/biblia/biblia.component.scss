@@ -87,6 +87,14 @@ h2 {
       background-color: #c9c9c9;
     }
 
+    &.marcado {
+      background-color: #ffe4bb;
+  
+      &.forte {
+        background-color: #ffd597;
+      }
+    }
+
     sup {
       margin-right: 3px;
     }

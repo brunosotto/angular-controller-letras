@@ -50,4 +50,12 @@ h1 {
   &:nth-child(odd) {
     background-color: #c9c9c9;
   }
+
+  &.marcado {
+    background-color: #ffe4bb;
+
+    &.forte {
+      background-color: #ffd597;
+    }
+  }
 }
