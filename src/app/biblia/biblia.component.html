@@ -1,4 +1,4 @@
-<app-navbar [title]="siglaLivro && capituloNum ? ( livro?.nome + ':' + capituloNum ) : ( versao ? versions[versao] : 'Bíblia' )" routerBack="/"></app-navbar>
+<app-navbar (limpou)="fraco()" [title]="siglaLivro && capituloNum ? ( livro?.nome + ':' + capituloNum ) : ( versao ? versions[versao] : 'Bíblia' )" routerBack="/"></app-navbar>
 
 <app-container>
   <h1 id="topo-title">Bíblia {{ siglaLivro ? versao.toUpperCase() : '' }}</h1>

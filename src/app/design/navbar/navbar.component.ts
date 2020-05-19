@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { Config, ConfigService } from 'src/app/config/config.service';
 import { Title } from '@angular/platform-browser';
 
@@ -10,6 +10,8 @@ import { Title } from '@angular/platform-browser';
 export class NavbarComponent {
 
   private _config: Config;
+
+  @Output() private readonly limpou: EventEmitter<boolean> = new EventEmitter<boolean>();
 
   @Input()
   public set title(text: string) {
@@ -28,6 +30,7 @@ export class NavbarComponent {
   public limpar(): void {
     // TODO: bloquear até receber de volta
     this.service.sendText(' ');
+    this.limpou.emit(true);
   }
 
 }

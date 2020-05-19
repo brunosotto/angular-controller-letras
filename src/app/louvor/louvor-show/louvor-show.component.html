@@ -1,5 +1,5 @@
 <ng-container *ngIf="louvor">
-  <app-navbar [title]="louvor?.name" routerBack="/"></app-navbar>
+  <app-navbar (limpou)="fraco()" [title]="louvor?.name" routerBack="/"></app-navbar>
 
   <app-container>
     <h1 id="topo-title">{{ louvor.name }}</h1>

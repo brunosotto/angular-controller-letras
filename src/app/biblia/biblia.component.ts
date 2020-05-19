@@ -160,4 +160,8 @@ export class BibliaComponent {
     this.config.sendText(text);
   }
 
+  public fraco(): void {
+    this.forte = false;
+  }
+
 }

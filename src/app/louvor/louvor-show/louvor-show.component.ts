@@ -109,4 +109,8 @@ export class LouvorShowComponent implements OnDestroy {
     this.service.sendText(this.louvor.arr[this.last]);
   }
 
+  public fraco(): void {
+    this.forte = false;
+  }
+
 }
