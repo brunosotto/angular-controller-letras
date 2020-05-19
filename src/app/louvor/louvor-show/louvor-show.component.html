@@ -2,8 +2,8 @@
   <app-navbar [title]="louvor?.name" routerBack="/"></app-navbar>
 
   <app-container>
-    <h1>{{ louvor.name }}</h1>
-    <div class="text-block" [class.marcado]="i === last" [class.forte]="forte" *ngFor="let item of louvor.arr; let i = index;">
+    <h1 id="topo-title">{{ louvor.name }}</h1>
+    <div class="text-block" [id]="'louvor-' + i" [class.marcado]="i === last" [class.forte]="forte" *ngFor="let item of louvor.arr; let i = index;">
       <div [innerHTML]="item | nl2br"></div>
       <div>
         <button type="button" (click)="emitir(i)" class="btn-novo">

@@ -1,7 +1,7 @@
 <app-navbar [title]="siglaLivro && capituloNum ? ( livro?.nome + ':' + capituloNum ) : ( versao ? versions[versao] : 'Bíblia' )" routerBack="/"></app-navbar>
 
 <app-container>
-  <h1>Bíblia {{ siglaLivro ? versao.toUpperCase() : '' }}</h1>
+  <h1 id="topo-title">Bíblia {{ siglaLivro ? versao.toUpperCase() : '' }}</h1>
   <ng-container *ngIf="!versao; else elseBlock">
     <h2>Selecione abaixo a versão.</h2>
 
@@ -18,7 +18,7 @@
 
       <div *ngIf="capitulo" class="versiculos">
         <ng-container *ngFor="let ver of capitulo.versiculos; let i = index;">
-          <div [class.marcado]="i === last" [class.forte]="forte">
+          <div [id]="'versiculo-' + i" [class.marcado]="i === last" [class.forte]="forte">
             <span>
               <sup>{{ ver.versiculo }}</sup>
               <span [innerHTML]="ver.texto"></span>

@@ -96,7 +96,7 @@ export class BibliaComponent {
   }
 
   private reEmitir(): void {
-    this.emitir(this.last || 0);
+    this.emitir(this.last || 0, true);
   }
 
   private next(): void {
@@ -104,7 +104,7 @@ export class BibliaComponent {
       return;
     }
 
-    this.emitir(isNaN(this.last) ? 0 : (this.last + 1));
+    this.emitir(isNaN(this.last) ? 0 : (this.last + 1), true);
   }
 
   private prev(): void {
@@ -112,7 +112,12 @@ export class BibliaComponent {
       return;
     }
 
-    this.emitir(isNaN(this.last) ? 0 : (this.last - 1));
+    this.emitir(isNaN(this.last) ? 0 : (this.last - 1), true);
+  }
+
+  private scroll(id): void {
+    const el = document.getElementById(id);
+    el.scrollIntoView();
   }
 
   public bookLink(sigla: string): string[] {
@@ -135,7 +140,7 @@ export class BibliaComponent {
     return [String(cap)];
   }
 
-  public emitir(index: number): void {
+  public emitir(index: number, autoScroll?: boolean): void {
     const ver = this.capitulo.versiculos[index];
     const text = `${ver.texto}\n\n${this.livro.nome} ${this.capitulo.capitulo}:${String(ver.versiculo)}`;
 
@@ -144,6 +149,12 @@ export class BibliaComponent {
 
     // marca o forte
     this.forte = true;
+
+    // segue no scroll
+    if (autoScroll) {
+      const scrollId = index ? 'versiculo-' + (index - 1) : 'topo-title';
+      this.scroll(scrollId);
+    }
 
     // TODO: bloquear todos até receber de volta
     this.config.sendText(text);

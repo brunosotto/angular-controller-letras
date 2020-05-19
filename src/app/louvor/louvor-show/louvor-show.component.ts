@@ -68,7 +68,7 @@ export class LouvorShowComponent implements OnDestroy {
   }
 
   private reEmitir(): void {
-    this.emitir(this.last || 0);
+    this.emitir(this.last || 0, true);
   }
 
   private next(): void {
@@ -76,7 +76,7 @@ export class LouvorShowComponent implements OnDestroy {
       return;
     }
 
-    this.emitir(isNaN(this.last) ? 0 : (this.last + 1));
+    this.emitir(isNaN(this.last) ? 0 : (this.last + 1), true);
   }
 
   private prev(): void {
@@ -84,15 +84,26 @@ export class LouvorShowComponent implements OnDestroy {
       return;
     }
 
-    this.emitir(isNaN(this.last) ? 0 : (this.last - 1));
+    this.emitir(isNaN(this.last) ? 0 : (this.last - 1), true);
   }
 
-  public emitir(index: number): void {
+  private scroll(id): void {
+    const el = document.getElementById(id);
+    el.scrollIntoView();
+  }
+
+  public emitir(index: number, autoScroll?: boolean): void {
     // guarda o indice
     this.last = index;
 
     // marca o forte
     this.forte = true;
+
+    // segue no scroll
+    if (autoScroll) {
+      const scrollId = index ? 'louvor-' + (index - 1) : 'topo-title';
+      this.scroll(scrollId);
+    }
 
     // TODO: bloquear todos até receber de volta
     this.service.sendText(this.louvor.arr[this.last]);
