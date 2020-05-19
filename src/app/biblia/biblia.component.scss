@@ -82,6 +82,8 @@ h2 {
     display: flex;
     justify-content: space-between;
     background-color: #fff;
+    min-height: 80px;
+    align-items: center;
 
     &:nth-child(odd) {
       background-color: #c9c9c9;
@@ -119,6 +121,7 @@ h2 {
   margin-left: 2.8rem;
   white-space: nowrap;
   min-width: 110px;
+  min-height: 60px;
   cursor: pointer;
   transition: background-color 100ms;
 
@@ -128,7 +131,7 @@ h2 {
 }
 
 .voltar {
-  display: block;
+  display: inline-block;
   text-decoration: none;
   margin-left: 2.64rem;
 }

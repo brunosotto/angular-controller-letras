@@ -14,7 +14,9 @@
     <ng-container *ngIf="biblia$ | async as biblia">
       <h2>{{siglaLivro ? ( livro.nome + ( capituloNum ? ':' + capituloNum : '' ) ) : versions[versao]}}</h2>
 
-      <a class="voltar" [routerLink]="['..']">Voltar</a>
+      <div>
+        <a class="voltar" [routerLink]="['..']">Voltar</a>
+      </div>
 
       <div *ngIf="capitulo" class="versiculos">
         <ng-container *ngFor="let ver of capitulo.versiculos; let i = index;">
