@@ -1,13 +1,15 @@
-<app-navbar routerBack="/"></app-navbar>
+<ng-container *ngIf="louvor$ | async as louvor">
+  <app-navbar [title]="louvor.name" routerBack="/"></app-navbar>
 
-<app-container *ngIf="louvor$ | async as louvor">
-  <h1>{{ louvor.name }}</h1>
-  <div class="text-block" *ngFor="let item of toArray(louvor.text)">
-    <div [innerHTML]="item | nl2br"></div>
-    <div>
-      <button type="button" (click)="emitir(item)" class="btn-novo">
-        <span>Emitir</span>
-      </button>
+  <app-container>
+    <h1>{{ louvor.name }}</h1>
+    <div class="text-block" *ngFor="let item of toArray(louvor.text)">
+      <div [innerHTML]="item | nl2br"></div>
+      <div>
+        <button type="button" (click)="emitir(item)" class="btn-novo">
+          <span>Emitir</span>
+        </button>
+      </div>
     </div>
-  </div>
-</app-container>
+  </app-container>
+</ng-container>

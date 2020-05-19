@@ -1,8 +1,7 @@
-<app-navbar routerBack="/"></app-navbar>
+<app-navbar [title]="siglaLivro ? ( livro?.nome + ( capituloNum ? ':' + capituloNum : '' ) ) : ( versao ? versions[versao] : 'Bíblia' )" routerBack="/"></app-navbar>
 
 <app-container>
   <h1>Bíblia {{ siglaLivro ? versao.toUpperCase() : '' }}</h1>
-
   <ng-container *ngIf="!versao; else elseBlock">
     <h2>Selecione abaixo a versão.</h2>
 
