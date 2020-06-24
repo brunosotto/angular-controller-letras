@@ -54,6 +54,7 @@ export class LouvorFormComponent implements OnInit {
       id: null,
       name: this.util.trimPreventNull(formModel.name as string),
       text: this.util.trimPreventNull(formModel.text as string),
+      arr: null,
     };
 
     return save;

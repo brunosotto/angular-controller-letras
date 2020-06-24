@@ -6,12 +6,9 @@
 <form [formGroup]="louvorForm" (ngSubmit)="onSubmit()">
   <div mat-dialog-content>
     <mat-form-field>
-      <input matInput formControlName="name" placeholder="Nome*" maxlength="40" trim="blur">
+      <input matInput formControlName="name" placeholder="Nome" required maxlength="40" trim="blur">
       <mat-error *ngIf="louvorForm.get('name').hasError('required')">
         Informe o nome do louvor
-      </mat-error>
-      <mat-error *ngIf="louvorForm.get('name').hasError('regex')">
-        Por favor, digite apenas letras ou números
       </mat-error>
     </mat-form-field>
 

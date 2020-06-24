@@ -1,4 +1,3 @@
-import { KeyValueModel } from 'src/app/models/key-value.model';
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { Louvor } from '../../models/louvor.model';
@@ -27,8 +26,7 @@ export class LouvorFormDetailComponent implements OnInit {
   private createForm(): void {
     this._louvorForm = this.fb.group({
       name: [null, Validators.required, this.util.multiValida([
-        this.util.validaEspacoAsync(),
-        this.util.validaRegexAsync(this.util.regexCaracterEspecial)
+        this.util.validaEspacoAsync()
       ])],
       text: [null, Validators.required]
     });
@@ -74,6 +72,7 @@ export class LouvorFormDetailComponent implements OnInit {
       id: this.louvor.id,
       name: this.util.trimPreventNull(formModel.name as string),
       text: this.util.trimPreventNull(formModel.text as string),
+      arr: null
     };
 
     return save;
