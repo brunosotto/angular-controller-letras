@@ -26,10 +26,22 @@ mat-toolbar{
 }
 
 .btn-page {
+  &:first-child{
+    margin-left: 7.3vw;
+  }
   margin: 0 0.3vw 0;
   display: flex;
   align-items: center;
   text-decoration: none;
+  color: #333333;
+  height: 100%;
+  padding: 0 12px;
+
+  &:hover,
+  &.active{
+    color: #000000;
+    background-color: #dddddd;
+  }
 }
 
 .fill-remaining-space {

@@ -8,7 +8,10 @@ import { LouvorShowComponent } from './louvor/louvor-show/louvor-show.component'
 import { BibliaComponent } from './biblia/biblia.component';
 
 const ROUTES: Routes = [
-  { path: '', component: HomePageComponent },
+  { path: '', redirectTo: '/inicio', pathMatch: 'full' },
+
+  { path: 'inicio', component: HomePageComponent },
+  { path: 'config', component: HomePageComponent },
 
   { path: 'biblia', component: BibliaComponent },
   { path: 'biblia/:versao', component: BibliaComponent },
