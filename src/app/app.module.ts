@@ -13,6 +13,7 @@ import { ConfigService } from './config/config.service';
 import { LouvorModule } from './louvor/louvor.module';
 import { Nl2BrPipeModule } from 'nl2br-pipe';
 import { BibliaModule } from './biblia/biblia.module';
+import { ConfigModule } from './config/config.module';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { BibliaModule } from './biblia/biblia.module';
     AppRoutingModule,
     DesignModule,
     HomeModule,
+    ConfigModule,
     StaticPagesModule,
     TextoModule,
     BibliaModule,

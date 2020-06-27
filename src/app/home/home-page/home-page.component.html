@@ -1,29 +1,21 @@
-<app-navbar title="Configurações"></app-navbar>
+<app-navbar title="Início"></app-navbar>
 
 <app-container>
   <div>
     <h1>Bem-vindo ao letras!</h1>
+    <h2>Futura ferramenta de data show!</h2>
+    <p>Distribuida gratuitamente para a honra e glória do Senhor Jesus com a intensão de abençoar o reino nesse tempo tão difícil.</p>
+    <p>Desenvolvida com amor ❤️ utilizando JS, Angular, NodeJS, Socket.io e uma pitada de JQuery.</p>
+    <p>Caso queira contribuir financeiramente, com idéias ou no desenvolvimento entre em contato comigo <a href="mailto:bruno@sotto.com.br">bruno@sotto.com.br</a>.</p>
+    <p>Não se esqueça de fazer seu 📝 registro gratuito clicando neste <a href="https://forms.gle/yqD9Hv8Ccpcxv2th9" target="_blank">link</a>. Assim receberá em primeira mão as novidades e atualizações.</p>
 
-    <h2>Futura ferramenta de data show</h2>
+    <h1>Links</h1>
+    <a href="/client" target="_blank" class="btn-novo">
+      <span>Client do OBS</span>
+    </a>
+    <a href="/datashow" target="_blank" class="btn-novo">
+      <span>Data Show</span>
+    </a>
+    <p>*Troque localhost pelo ip deste computador na rede caso for acessar a partir de outro dispositovo.</p>
   </div>
-
-  <form *ngIf="config$ | async as config" (ngSubmit)="onSubmit(config)">
-    <mat-slide-toggle [(ngModel)]="config.top" name="top" class="itens">Topo</mat-slide-toggle>
-
-    <mat-form-field class="itens">
-      <mat-label>Distanciamento</mat-label>
-      <input matInput [(ngModel)]="config.pad" name="pad" type="number" min="0.1" max="8" placeholder="0.1 a 8">
-    </mat-form-field>
-
-    <mat-form-field class="itens">
-      <mat-label>Tamanho</mat-label>
-      <input matInput [(ngModel)]="config.size" name="size" type="number" min="0.1" max="8" placeholder="0.1 a 8">
-    </mat-form-field>
-
-    <div>
-      <button type="submit" class="btn-novo">
-        <span>Emitir</span>
-      </button>
-    </div>
-  </form>
 </app-container>

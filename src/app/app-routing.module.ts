@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { HomePageComponent } from './home/home-page/home-page.component';
+import { ConfigPageComponent } from './config/config-page/config-page.component';
 import { NotfoundPageComponent } from './static-pages/notfound-page/notfound-page.component';
 import { TextoComponent } from './texto/texto.component';
 import { LouvorComponent } from './louvor/louvor.component';
@@ -11,7 +12,8 @@ const ROUTES: Routes = [
   { path: '', redirectTo: '/inicio', pathMatch: 'full' },
 
   { path: 'inicio', component: HomePageComponent },
-  { path: 'config', component: HomePageComponent },
+
+  { path: 'config', component: ConfigPageComponent },
 
   { path: 'biblia', component: BibliaComponent },
   { path: 'biblia/:versao', component: BibliaComponent },
